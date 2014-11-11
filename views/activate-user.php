@@ -1,6 +1,6 @@
 <?php
 
-include_once '../includes/init.php';
+include_once '../config/init.php';
 $general->logged_in_protect();
 
 ?>
@@ -18,14 +18,14 @@ $general->logged_in_protect();
 </head>
 
 <body class="eShop activate">
-<?php include_once '../includes/header.php'; ?>
+<?php include_once '../header.php'; ?>
 
 <div class="container">
   <div class="row">
     <div class="col-md-9">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title">Account Activation</div>
+          <div class="panel-title">Congratulations!</div>
         </div>
         <div class="panel-body">
           <strong>Your account has been successfully activated.</strong>

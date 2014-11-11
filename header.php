@@ -14,7 +14,8 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="/views/users/get-started.php">sign in to your account</a></li>
+              <li><a href="/views/users/get-started.php">are you a <b>customer</b>?</a></li>
+              <li><a href="/views/partners/login.php">are you a <b>partner</b>?</a></li>
             </ul>
           </div>
         </div>

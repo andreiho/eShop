@@ -74,8 +74,8 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #444;
 }
 .btn-default {
-  background-color: #f4f4f4;
-  border-color: #f4f4f4;
+  background-color: #fff;
+  border: 2px solid #333;
   color: #333;
 }
 .btn-default:hover,
@@ -83,8 +83,26 @@ h1, h2, h3, h4, h5, h6 {
 .btn-default.active,
 .btn-default:focus,
 .btn-default.focus {
-  background-color: #f1f1f1;
-  border-color: #f1f1f1;
+  background-color: #333;
+  border-color: #333;
+  color: #fff;
+}
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='url'] {
+  border-radius: 0;
+  border-color: lightgray;
+  box-shadow: none;
+  outline: none;
+  font-size: 12px;
+}
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus,
+input[type='url']:focus {
+  border: 1px solid #333;
+  box-shadow: none;
 }
 
 /* HEADER */
@@ -213,17 +231,6 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   margin: 100px auto;
 }
-#myAccount input {
-  border-radius: 0;
-  border-color: lightgray;
-  box-shadow: none;
-  outline: none;
-  font-size: 12px;
-  text-transform: lowercase;
-}
-#myAccount input:focus {
-  border: 1px solid #333;
-}
 #myAccount .forgot-password {
   color: #333;
   font-size: 12px;
@@ -248,7 +255,7 @@ h1, h2, h3, h4, h5, h6 {
 .eShop .alert-info {
   box-shadow: inset #31708f 3px 0;
 }
-#myAccount #registerSuccess {
+.eShop .registerSuccess {
   margin-bottom: 30px;
 }
 .home i {

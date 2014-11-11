@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: ah
- * Date: 11/9/14
- * Time: 12:27 PM
- */
 
 class Bcrypt {
 

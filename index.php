@@ -1,6 +1,6 @@
 <?php
 
-include_once 'includes/init.php';
+include_once 'config/init.php';
 $general->logged_in_protect();
 
 ?>
@@ -18,12 +18,12 @@ $general->logged_in_protect();
 </head>
 
 <body class="eShop home">
-<?php include_once 'includes/header.php'; ?>
+<?php include_once 'header.php'; ?>
 
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      content here
+      hi there.
     </div>
     <div class="col-md-3">
       <div class="panel panel-default text-center">
@@ -38,7 +38,7 @@ $general->logged_in_protect();
           We offer low commision, 24/7 support and permanent backup of your products and orders.
         </div>
         <div class="panel-footer">
-          <a href="/views/partners/get-started.php" class="btn btn-primary btn-lg btn-block">Get Started Now</a>
+          <a href="/views/partners/get-started.php" class="btn btn-default btn-lg btn-block">Get Started Now</a>
         </div>
       </div>
     </div>
