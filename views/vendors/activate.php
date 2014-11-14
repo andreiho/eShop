@@ -1,7 +1,8 @@
 <?php
 
-include_once '../config/init.php';
-$general->loggedInProtect();
+include_once '../../config/init.php';
+$general->vendorLoggedInProtect();
+$general->userLoggedInProtect();
 
 ?>
 
@@ -18,7 +19,7 @@ $general->loggedInProtect();
 </head>
 
 <body class="eShop activate">
-<?php include_once '../header.php'; ?>
+<?php include_once '../../header.php'; ?>
 
 <div class="container">
   <div class="row">

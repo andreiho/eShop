@@ -27,3 +27,5 @@ if ($general->vendorLoggedIn() === true)  {
 $errors = array();
 
 ob_start();
+
+?>

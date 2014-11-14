@@ -1,7 +1,8 @@
 <?php
 
 include_once '../../config/init.php';
-$general->loggedInProtect();
+$general->userLoggedInProtect();
+$general->vendorLoggedInProtect();
 
 // LOGIN
 if (isset($_POST['loginSubmit'])) {
@@ -22,11 +23,16 @@ if (isset($_POST['loginSubmit'])) {
       $userLogin = $users->loginUser($loginEmail, $loginPassword);
 
       if ($userLogin === false) {
+
         $loginErrors[] = 'Oops, seems like that e-mail/password is invalid.';
+
       } else {
+
         $_SESSION['userId'] = $userLogin;
-        header('Location: /home.php');
+
+        header('Location: /views/users/home.php');
         exit();
+
       }
     }
   }

@@ -1,7 +1,8 @@
 <?php
 
 include_once '../../config/init.php';
-$general->loggedInProtect();
+$general->vendorLoggedInProtect();
+$general->userLoggedInProtect();
 
 // REGISTRATION
 if (isset($_POST['vendorRegisterSubmit'])) {

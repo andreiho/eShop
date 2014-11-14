@@ -1,7 +1,8 @@
 <?php
 
 include_once '../../config/init.php';
-$general->loggedInProtect();
+$general->vendorLoggedInProtect();
+$general->userLoggedInProtect();
 
 // GENERATE KEY FOR LOGIN
 if (isset($_POST['vendorSendKeySubmit'])) {
@@ -47,7 +48,7 @@ if (isset($_POST['vendorLoginSubmit'])) {
 
     $_SESSION['vendorId'] = $vendorLogin;
 
-    header('Location: /home.php');
+    header('Location: /views/vendors/home.php');
     exit();
 
   }

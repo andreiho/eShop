@@ -6,14 +6,15 @@
         <div class="col-sm-6">
           <div class="brand">
             <ul class="nav nav-pills">
-              <li><a href="/home.php">eShop for Customers</a></li>
+              <li><a href="/views/users/home.php">eShop for Customers</a></li>
             </ul>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b>customer</b>?</a></li>
+              <li><a href="">hello, <b>customer</b></a></li>
+              <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
         </div>
@@ -23,14 +24,15 @@
         <div class="col-sm-6">
           <div class="brand">
             <ul class="nav nav-pills">
-              <li><a href="/home.php">eShop for Partners</a></li>
+              <li><a href="/views/vendors/home.php">eShop for Partners</a></li>
             </ul>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="/views/users/get-started.php">are you a <b>customer</b>?</a></li>
+              <li><a href="">hello, <b>partner</b></a></li>
+              <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
         </div>
