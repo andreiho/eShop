@@ -104,3 +104,5 @@ $general->loggedInProtect();
 
 </body>
 </html>
+
+<?php ob_flush(); ?>

@@ -183,4 +183,20 @@ class Vendors {
     }
   }
 
+  public function vendorData($vendorId) {
+
+    $query = $this->db->prepare("SELECT * FROM `vendors` WHERE `vendor_id`= ?");
+    $query->bindValue(1, $vendorId);
+
+    try {
+
+      $query->execute();
+
+      return $query->fetch();
+
+    } catch(PDOException $e){
+      die($e->getMessage());
+    }
+  }
+
 } 

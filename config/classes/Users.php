@@ -99,8 +99,8 @@ class Users {
 
       $query->execute();
       $data = $query->fetch();
-      $storedPassword = $data['loginPassword'];
-      $id = $data['id'];
+      $storedPassword = $data['user_password'];
+      $id = $data['user_id'];
 
       if($bcrypt->verify($loginPassword, $storedPassword) === true) {
         return $id;
@@ -151,6 +151,22 @@ class Users {
       }
 
     } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function userData($userId) {
+
+    $query = $this->db->prepare("SELECT * FROM `users` WHERE `user_id`= ?");
+    $query->bindValue(1, $userId);
+
+    try {
+
+      $query->execute();
+
+      return $query->fetch();
+
+    } catch(PDOException $e){
       die($e->getMessage());
     }
   }

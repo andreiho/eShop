@@ -12,14 +12,14 @@ class General {
 
   public function loggedInProtect() {
     if ($this->userLoggedIn() === true || $this->vendorLoggedIn() === true) {
-      header('Location: home.php');
+      header('Location: /home.php');
       exit();
     }
   }
 
   public function loggedOutProtect() {
     if ($this->userLoggedIn() === false || $this->vendorLoggedIn() === false) {
-      header('Location: index.php');
+      header('Location: /index.php');
       exit();
     }
   }

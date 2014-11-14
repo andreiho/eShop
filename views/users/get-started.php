@@ -19,13 +19,13 @@ if (isset($_POST['loginSubmit'])) {
       $loginErrors[] = 'You need to activate your account. Please check your e-mail.';
     } else {
 
-      $login = $users->loginUser($loginEmail, $loginPassword);
+      $userLogin = $users->loginUser($loginEmail, $loginPassword);
 
-      if ($login === false) {
+      if ($userLogin === false) {
         $loginErrors[] = 'Oops, seems like that e-mail/password is invalid.';
       } else {
-        $_SESSION['id'] = $login;
-        header('Location: home.php');
+        $_SESSION['userId'] = $userLogin;
+        header('Location: /home.php');
         exit();
       }
     }
@@ -161,4 +161,6 @@ if (isset($_POST['registerSubmit'])) {
 </div>
 </body>
 </html>
+
+<?php ob_flush(); ?>
 

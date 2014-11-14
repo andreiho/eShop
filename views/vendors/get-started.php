@@ -124,3 +124,5 @@ if (isset($_POST['vendorRegisterSubmit'])) {
 
 </body>
 </html>
+
+<?php ob_flush(); ?>

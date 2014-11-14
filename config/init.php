@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 include_once 'classes/Bcrypt.php';
 include_once 'classes/General.php';
 include_once 'classes/Users.php';
@@ -23,3 +25,5 @@ if ($general->vendorLoggedIn() === true)  {
 }
 
 $errors = array();
+
+ob_start();

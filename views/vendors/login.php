@@ -25,8 +25,6 @@ if (isset($_POST['vendorSendKeySubmit'])) {
   if(empty($vendorLoginErrors) === true) {
 
     $vendorLoginEmail = htmlentities($_POST['vendorLoginEmail']);
-    $_SESSION['vendorLoginEmail'] = $vendorLoginEmail;
-
     $vendors->generateVendorLoginKey($vendorLoginEmail);
 
     header('Location: login.php?key-sent&email=' . $vendorLoginEmail . '');
@@ -146,3 +144,5 @@ if (isset($_POST['vendorLoginSubmit'])) {
 
 </body>
 </html>
+
+<?php ob_flush(); ?>
