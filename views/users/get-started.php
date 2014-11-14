@@ -117,7 +117,7 @@ if (isset($_POST['registerSubmit'])) {
         </div>
         <?php
         if(empty($loginErrors) === false){
-          echo '<div class="panel-footer"><div class="alert alert-danger">' . implode('</p><p>', $loginErrors) . '</div></div>';
+          echo '<div class="panel-footer"><div class="alert alert-danger">' . implode($loginErrors) . '</div></div>';
         }
         ?>
       </div>

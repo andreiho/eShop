@@ -23,12 +23,17 @@ $general->logged_in_protect();
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      <div class="panel panel-default">
+
+      <?php
+      if (isset($_GET['success']) === true && empty ($_GET['success']) === true) {
+      ?>
+
+      <div class="panel panel-default bg-success">
         <div class="panel-heading">
           <div class="panel-title">Congratulations!</div>
         </div>
         <div class="panel-body">
-          <strong>Your account has been successfully activated.</strong>
+          <strong class="text-success">Your account has been successfully activated.</strong>
           <br><br>
           Now you can start shopping. But first, please sign in.
         </div>
@@ -36,7 +41,47 @@ $general->logged_in_protect();
           <a href="users/get-started.php" class="btn btn-primary btn-lg">Sign In to Your Account</a>
         </div>
       </div>
+
+      <?php
+
+      } else if (isset ($_GET['email'], $_GET['code']) === true) {
+
+        $email = trim($_GET['email']);
+        $code	= trim($_GET['code']);
+
+        if ($users->doesRegisterEmailExist($email) === false) {
+          $errors[] = 'Sorry, we couldn\'t find that e-mail address.';
+        } else if ($users->activateUser($email, $code) === false) {
+          $errors[] = 'Sorry, we couldn\'t activate your account.';
+        }
+
+        if (empty($errors) === false ) {
+
+          echo '
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Something went wrong</div>
+              </div>
+              <div class="panel-body">
+                <strong class="text-danger">' . implode($errors) . '</strong>
+              </div>
+            </div>
+          ';
+
+        } else {
+          header('Location: activate-user.php?success');
+          exit();
+        }
+
+      } else {
+        header('Location: /index.php');
+        exit();
+      }
+
+      ?>
+
     </div>
+
     <div class="col-md-3">
       <div class="panel panel-default text-center">
         <div class="panel-heading">

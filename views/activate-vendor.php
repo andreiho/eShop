@@ -23,16 +23,60 @@ $general->logged_in_protect();
 <div class="container">
   <div class="row">
     <div class="col-md-9">
+
+      <?php
+      if (isset($_GET['success']) === true && empty ($_GET['success']) === true) {
+      ?>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="panel-title">Congratulations!</div>
         </div>
         <div class="panel-body">
-          <strong>A new partner account has been successfully activated.</strong>
+          <strong class="text-success">A new partner account has been successfully activated.</strong>
           <br><br>
           You can inform the new partner that they can start using their account now.
         </div>
       </div>
+
+      <?php
+
+      } else if (isset ($_GET['email'], $_GET['code']) === true) {
+
+        $email = trim($_GET['email']);
+        $code	= trim($_GET['code']);
+
+        if ($vendors->doesVendorRegisterEmailExist($email) === false) {
+          $errors[] = 'Sorry, but this vendor does not exist in the system.';
+        } else if ($vendors->activateVendor($email, $code) === false) {
+          $errors[] = 'Sorry, but this vendor cannot be activated.';
+        }
+
+        if (empty($errors) === false ) {
+
+          echo '
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="panel-title">Something went wrong</div>
+              </div>
+              <div class="panel-body">
+                <strong class="text-danger">' . implode($errors) . '</strong>
+              </div>
+            </div>
+          ';
+
+        } else {
+          header('Location: activate-vendor.php?success');
+          exit();
+        }
+
+      } else {
+        header('Location: /index.php');
+        exit();
+      }
+
+      ?>
+
     </div>
     <div class="col-md-3">
       <div class="panel panel-default text-center">

@@ -59,7 +59,7 @@ if (isset($_POST['vendorRegisterSubmit'])) {
   <?php
   if (isset($_GET['success']) && empty($_GET['success'])) {
     echo "<div class='alert alert-success registerSuccess'>
-              <strong>Thank you for signing up as a partner. </strong>We will notify you on the e-mail address you provided as soon as your account has been activated.
+              <strong>Thank you for signing up as a partner. </strong>We will notify you on the e-mail address you provided as soon as your account has been approved.
               In the meantime, <a href='../products'>browse some of our products.</a>
           </div>";
   }
@@ -74,12 +74,12 @@ if (isset($_POST['vendorRegisterSubmit'])) {
           <form accept-charset="UTF-8" role="form" method="post">
             <div class="form-group">
               <label for="vendorRegisterName" class="control-label">Shop name</label>
-              <input type="text" id="vendorRegisterName" class="form-control" name="vendorRegisterName" placeholder="eg. Proshop"
+              <input type="text" id="vendorRegisterName" class="form-control" name="vendorRegisterName" placeholder="eg. Myshop"
                      value="<?php if(isset($_POST['vendorRegisterName'])) echo htmlentities($_POST['vendorRegisterName']); ?>"/>
             </div>
             <div class="form-group">
               <label for="vendorRegisterEmail" class="control-label">Official e-mail</label>
-              <input type="email" id="vendorRegisterEmail" class="form-control" name="vendorRegisterEmail" placeholder="eg. contact@proshop.dk"
+              <input type="email" id="vendorRegisterEmail" class="form-control" name="vendorRegisterEmail" placeholder="eg. contact@myshop.dk"
                      value="<?php if(isset($_POST['vendorRegisterEmail'])) echo htmlentities($_POST['vendorRegisterEmail']); ?>"/>
             </div>
             <div class="form-group">
@@ -89,7 +89,7 @@ if (isset($_POST['vendorRegisterSubmit'])) {
             </div>
             <div class="form-group">
               <label for="vendorRegisterUrl" class="control-label">URL to your API</label>
-              <input type="url" id="vendorRegisterUrl" class="form-control" name="vendorRegisterUrl" placeholder="eg. http://yourshop.dk/products.json"
+              <input type="url" id="vendorRegisterUrl" class="form-control" name="vendorRegisterUrl" placeholder="eg. http://myshop.dk/products.json"
                      value="<?php if(isset($_POST['vendorRegisterUrl'])) echo htmlentities($_POST['vendorRegisterUrl']); ?>"/>
             </div>
             <input type="submit" name="vendorRegisterSubmit" value="I am ready" class="btn btn-primary btn-block btn-lg"/>
