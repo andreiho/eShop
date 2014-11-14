@@ -1,7 +1,7 @@
 <?php
 
 include_once 'config/init.php';
-$general->logged_in_protect();
+$general->loggedInProtect();
 
 ?>
 
@@ -38,7 +38,7 @@ $general->logged_in_protect();
           We offer low commision, 24/7 support and permanent backup of your products and orders.
         </div>
         <div class="panel-footer">
-          <a href="/views/partners/get-started.php" class="btn btn-default btn-lg btn-block">Get Started Now</a>
+          <a href="/views/vendors/get-started.php" class="btn btn-default btn-lg btn-block">Get Started Now</a>
         </div>
       </div>
     </div>

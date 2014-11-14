@@ -1,7 +1,7 @@
 <?php
 
 include_once '../../config/init.php';
-$general->logged_in_protect();
+$general->loggedInProtect();
 
 // REGISTRATION
 if (isset($_POST['vendorRegisterSubmit'])) {
@@ -74,7 +74,7 @@ if (isset($_POST['vendorRegisterSubmit'])) {
           <form accept-charset="UTF-8" role="form" method="post">
             <div class="form-group">
               <label for="vendorRegisterName" class="control-label">Shop name</label>
-              <input type="text" id="vendorRegisterName" class="form-control" name="vendorRegisterName" placeholder="eg. Myshop"
+              <input type="text" id="vendorRegisterName" class="form-control" name="vendorRegisterName" placeholder="eg. Myshop" autofocus
                      value="<?php if(isset($_POST['vendorRegisterName'])) echo htmlentities($_POST['vendorRegisterName']); ?>"/>
             </div>
             <div class="form-group">

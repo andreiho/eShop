@@ -1,7 +1,7 @@
 <?php
 
 include_once '../config/init.php';
-$general->logged_in_protect();
+$general->loggedInProtect();
 
 ?>
 
@@ -11,10 +11,10 @@ $general->logged_in_protect();
 <head>
   <meta charset="utf-8">
   <title>Activate | eShop</title>
-  <link rel="shortcut icon" href="../images/ico/favicon.ico">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../css/font-awesome.min.css" rel="stylesheet">
-  <link href="../css/main.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../../images/ico/favicon.ico">
+  <link href="../../css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../css/font-awesome.min.css" rel="stylesheet">
+  <link href="../../css/main.css" rel="stylesheet">
 </head>
 
 <body class="eShop activate">
@@ -38,7 +38,7 @@ $general->logged_in_protect();
           Now you can start shopping. But first, please sign in.
         </div>
         <div class="panel-footer">
-          <a href="users/get-started.php" class="btn btn-primary btn-lg">Sign In to Your Account</a>
+          <a href="get-started.php" class="btn btn-primary btn-lg">Sign In to Your Account</a>
         </div>
       </div>
 
@@ -69,7 +69,7 @@ $general->logged_in_protect();
           ';
 
         } else {
-          header('Location: activate-user.php?success');
+          header('Location: activate.php?success');
           exit();
         }
 
@@ -95,7 +95,7 @@ $general->logged_in_protect();
           We offer low commision, 24/7 support and permanent backup of your products and orders.
         </div>
         <div class="panel-footer">
-          <a href="partners/get-started.php" class="btn btn-primary btn-lg btn-block">Get Started Now</a>
+          <a href="../vendors/get-started.php" class="btn btn-primary btn-lg btn-block">Get Started Now</a>
         </div>
       </div>
     </div>

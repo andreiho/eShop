@@ -16,7 +16,7 @@ class Users {
     $activationCode = $activationCode = uniqid(true);
 
     $emailSubject = 'eShop - Activate your account';
-    $emailBody = "Hi there,\r\n\r\nThank you for registering with us. To get started, follow the link bellow to activate your account: \r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/activate-user.php?email=$registerEmail&code=$activationCode\r\n\r\nThe eShop Team";
+    $emailBody = "Hi there,\r\n\r\nThank you for registering with us. To get started, follow the link bellow to activate your account: \r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/users/activate.php?email=$registerEmail&code=$activationCode\r\n\r\nThe eShop Team";
 
     $registerPassword = $bcrypt->genHash($registerPassword);
 

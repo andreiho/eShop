@@ -255,7 +255,8 @@ input[type='url']:focus {
 .eShop .alert-info {
   box-shadow: inset #31708f 3px 0;
 }
-.eShop .registerSuccess {
+.eShop .registerSuccess,
+.eShop .keySent {
   margin-bottom: 30px;
 }
 .home i {

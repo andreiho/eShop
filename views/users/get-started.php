@@ -1,7 +1,7 @@
 <?php
 
 include_once '../../config/init.php';
-$general->logged_in_protect();
+$general->loggedInProtect();
 
 // LOGIN
 if (isset($_POST['loginSubmit'])) {
@@ -102,7 +102,7 @@ if (isset($_POST['registerSubmit'])) {
           <form accept-charset="UTF-8" role="form" method="post">
             <fieldset>
               <div class="form-group">
-                <input type="email" name="loginEmail" placeholder="your e-mail" class="form-control"
+                <input type="email" name="loginEmail" placeholder="your e-mail" class="form-control" autofocus
                        value="<?php if(isset($_POST['loginEmail'])) echo htmlentities($_POST['loginEmail']); ?>" />
               </div>
               <div class="form-group">

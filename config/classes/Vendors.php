@@ -14,7 +14,7 @@ class Vendors {
 
     $adminEmail = 'andrei.horodinca@gmail.com';
     $emailToAdminSubject = 'eShop - A new partner requires activation';
-    $emailToAdminBody = "Hello admin,\r\n\r\nA shop owner has signed up as a partner on eShop. Follow the link below to approve the partnership:\r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/activate-vendor.php?email=$vendorRegisterEmail&code=$vendorActivationCode\r\n\r\nStay classy!";
+    $emailToAdminBody = "Hello admin,\r\n\r\nA shop owner has signed up as a partner on eShop. Follow the link below to approve the partnership:\r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/vendors/activate.php?email=$vendorRegisterEmail&code=$vendorActivationCode\r\n\r\nStay classy!";
 
     $emailToVendorSubject = 'eShop - Thank your for signing up as a partner';
     $emailToVendorBody = "Hi there,\r\n\r\nThank you for signing up to become a partner of eShop.\r\n\r\nYour request is now pending approval. Once your account has been approved by an administrator, you will be notified on your email.\r\n\r\nThe eShop Team";
@@ -82,6 +82,100 @@ class Vendors {
 
       } else {
         return false;
+      }
+
+    } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function doesVendorLoginEmailExist($vendorLoginEmail) {
+
+    $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email`= ?");
+    $query->bindValue(1, $vendorLoginEmail);
+
+    try {
+      $query->execute();
+      $rows = $query->fetchColumn();
+
+      if($rows == 1) {
+        return true;
+      } else {
+        return false;
+      }
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function isVendorLoginEmailConfirmed($vendorLoginEmail) {
+
+    $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email`= ? AND `vendor_confirmed` = ?");
+    $query->bindValue(1, $vendorLoginEmail);
+    $query->bindValue(2, 1);
+
+    try {
+
+      $query->execute();
+      $rows = $query->fetchColumn();
+
+      if($rows == 1) {
+        return true;
+      } else {
+        return false;
+      }
+
+    } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function generateVendorLoginKey($vendorLoginEmail) {
+
+    // Generate login key
+    $digits = 6;
+    $vendorLoginKey = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+
+    $emailToVendorSubject = 'eShop - Your login key';
+    $emailToVendorBody = "Hi there,\r\n\r\nUse this key to login to your account:\r\n\r\n$vendorLoginKey\r\n\r\nThe eShop Team";
+
+    $query = $this->db->prepare("UPDATE `vendors` SET `vendor_key` = ? WHERE `vendor_email` = ?");
+
+    $query->bindValue(1, $vendorLoginKey);
+    $query->bindValue(2, $vendorLoginEmail);
+
+    try {
+
+      $query->execute();
+
+      mail($vendorLoginEmail, $emailToVendorSubject, $emailToVendorBody);
+
+    } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function verifyVendorLoginKey($vendorLoginEmail, $vendorLoginKey) {
+
+    $query = $this->db->prepare("SELECT `vendor_key` FROM `vendors` WHERE `vendor_email` = ?");
+
+    $query->bindValue(1, $vendorLoginEmail);
+
+    try {
+
+      $query->execute();
+
+      while ( $rows = $query->fetch() ) {
+
+        $keyInDatabase = $rows['vendor_key'];
+
+        if ($keyInDatabase === $vendorLoginKey){
+          return true;
+        }
+        else {
+          return false;
+        }
       }
 
     } catch(PDOException $e) {

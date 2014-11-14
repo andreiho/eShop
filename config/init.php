@@ -12,9 +12,14 @@ $general = new General();
 $bcrypt = new Bcrypt();
 $date = new DateTime();
 
-/*if ($general->logged_in() === true)  {
-  $user_id 	= $_SESSION['id'];
-  $user 	= $users->userdata($user_id);
-}*/
+if ($general->userLoggedIn() === true)  {
+  $userId = $_SESSION['userId'];
+  $user = $users->userData($userId);
+}
+
+if ($general->vendorLoggedIn() === true)  {
+  $vendorId = $_SESSION['vendorId'];
+  $vendor = $vendors->vendorData($vendorId);
+}
 
 $errors = array();
