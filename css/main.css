@@ -315,11 +315,11 @@ label {
   text-overflow: ellipsis;
 }
 .product .edit,
-.product .delete {
+.product .remove {
   color: #bbb;
 }
 .product .edit:hover,
-.product .delete:hover {
+.product .remove:hover {
   color: #333;
 }
 .admin .table {

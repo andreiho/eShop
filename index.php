@@ -50,34 +50,23 @@ include_once 'config/init.php';
 </div>
 
 <!-- Modal Delete Product -->
-<?php
-
-$allProducts = $products->getAllProducts();
-
-foreach ($allProducts as $product) {
-
-  echo "
-  <div class='modal fade' id='" . $product['product_id'] . "'  tabindex='-1' role='dialog' aria-labelledby='deleteProductModalLabel' aria-hidden='true'>
-    <div class='modal-dialog'>
-      <div class='modal-content'>
-        <div class='modal-body'>
-          <div class='row'>
-            <div class='col-md-9'>
-              <div class='text'>Are you sure you want to remove the product <b>" . $product['product_name'] . "</b> from the shop?</div>
-            </div>
-            <div class='col-md-3 text-right'>
-              <a href='/admin/remove-product.php?id=" . $product['product_id'] . "' class='btn btn-primary'>Yes, remove</a>
-              <button type='button' class='btn btn-default' data-dismiss='modal'>No, cancel</button>
-            </div>
+<div class='modal fade' id='deleteProductModal' tabindex='-1' role='dialog' aria-labelledby='deleteProductModalLabel' aria-hidden='true'>
+  <div class='modal-dialog'>
+    <div class='modal-content'>
+      <div class='modal-body'>
+        <div class='row'>
+          <div class='col-md-9'>
+            <div class='text'>Are you sure you want to remove this product</b> from the shop?</div>
+          </div>
+          <div class='col-md-3 text-right'>
+            <a href='#' class='btn btn-primary remove-product'>Yes, remove</a>
+            <button type='button' class='btn btn-default' data-dismiss='modal'>No, cancel</button>
           </div>
         </div>
       </div>
     </div>
-    </div>
-  ";
-}
-
-?>
+  </div>
+  </div>
 
 <div class="container">
   <div class="row">
@@ -102,7 +91,7 @@ foreach ($allProducts as $product) {
                       <a href="#" class="btn btn-primary" role="button">Buy this</a>
                     </p>
                     <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                    <a href="" data-toggle="modal" data-target="#' . $product['product_id'] . '" class="delete"><i class="fa fa-times fa-lg"></i></a>
+                    <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
                   </div>
                 </div>
               </div>
@@ -155,6 +144,7 @@ foreach ($allProducts as $product) {
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="js/main.js" type="application/javascript"></script>
 
 </body>
 </html>
