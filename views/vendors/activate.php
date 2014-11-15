@@ -99,7 +99,9 @@ $general->userLoggedInProtect();
   </div>
 </div>
 
-</body>
-</html>
+<?php
 
-<?php ob_flush(); ?>
+include_once '../../footer.php';
+ob_flush();
+
+?>

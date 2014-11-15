@@ -1,3 +1,12 @@
+// Header resize
+$(window).scroll(function(){
+    if($(document).scrollTop() > 100) {
+        $('#header').addClass('small');
+    } else {
+        $('#header').removeClass('small');
+    }
+});
+
 // Delete product
 $(function(){
     $(".remove").click(function(e){

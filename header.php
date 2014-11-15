@@ -13,7 +13,7 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b>customer</b></a></li>
+              <li><a href="">hello, <b><?php echo $user['user_name'];?></b></a></li>
               <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
@@ -60,7 +60,7 @@
         <div class="col-sm-6">
           <div class="brand">
             <ul class="nav nav-pills">
-              <li><a href="/index.php">welcome to eShop</a></li>
+              <li><a href="/">welcome to eShop</a></li>
             </ul>
           </div>
         </div>

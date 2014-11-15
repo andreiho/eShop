@@ -93,7 +93,7 @@ if (isset($_POST['newProductSubmit'])) {
               <form accept-charset="UTF-8" role="form" method="post">
                 <fieldset>
                   <div class="form-group">
-                    <input type="text" name="newProductName" placeholder="name" class="form-control"/>
+                    <input type="text" name="newProductName" placeholder="name" class="form-control" autofocus/>
                   </div>
                   <div class="form-group">
                     <input type="text" name="newProductPrice" placeholder="price" class="form-control" />
@@ -224,5 +224,9 @@ if (isset($_POST['newProductSubmit'])) {
   </div>
 </div>
 
-</body>
-</html>
+<?php
+
+include_once '../footer.php';
+ob_flush();
+
+?>

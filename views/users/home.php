@@ -3,8 +3,8 @@
 include_once '../../config/init.php';
 $general->userLoggedOutProtect();
 
-/*$globalUserId = $user['userId'];
-$globalVendorId = $vendor['vendorId'];*/
+$globalUserId = $user['user_id'];
+$customerName = $user['user_name'];
 
 ?>
 
@@ -31,5 +31,9 @@ $globalVendorId = $vendor['vendorId'];*/
   </div>
 </div>
 
-</body>
-</html>
+<?php
+
+include_once '../../footer.php';
+ob_flush();
+
+?>

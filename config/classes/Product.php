@@ -45,7 +45,7 @@ class Product {
 
   public function getAllOwnProducts() {
 
-    $query = $this->db->prepare("SELECT COUNT(*) FROM `products` WHERE `vendor_id` = 28 AND `product_removed` = 0");
+    $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = 28 AND `product_removed` = 0");
 
     try {
 

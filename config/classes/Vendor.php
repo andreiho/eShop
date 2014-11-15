@@ -8,7 +8,7 @@ class Vendor {
     $this->db = $database;
   }
 
-  public function registerVendor($vendorRegisterName, $vendorRegisterEmail, $vendorRegisterCommission, $vendorRegisterUrl) {
+  public function registerVendor($vendorRegisterName, $vendorRegisterEmail, $vendorRegisterCommission) {
 
     $vendorActivationCode = $vendorActivationCode = uniqid(true);
 
@@ -19,13 +19,12 @@ class Vendor {
     $emailToVendorSubject = 'eShop - Thank your for signing up as a partner';
     $emailToVendorBody = "Hi there,\r\n\r\nThank you for signing up to become a partner of eShop.\r\n\r\nYour request is now pending approval. Once your account has been approved by an administrator, you will be notified on your email.\r\n\r\nThe eShop Team";
 
-    $query = $this->db->prepare("INSERT INTO `vendors` (`vendor_name`, `vendor_email`, `vendor_commission`, `vendor_url`, `vendor_code`) VALUES (?, ?, ?, ?, ?)");
+    $query = $this->db->prepare("INSERT INTO `vendors` (`vendor_name`, `vendor_email`, `vendor_commission`, `vendor_code`) VALUES (?, ?, ?, ?)");
 
     $query->bindValue(1, $vendorRegisterName);
     $query->bindValue(2, $vendorRegisterEmail);
     $query->bindValue(3, $vendorRegisterCommission);
-    $query->bindValue(4, $vendorRegisterUrl);
-    $query->bindValue(5, $vendorActivationCode);
+    $query->bindValue(4, $vendorActivationCode);
 
     try {
       $query->execute();

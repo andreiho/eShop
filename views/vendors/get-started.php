@@ -10,8 +10,7 @@ if (isset($_POST['vendorRegisterSubmit'])) {
   if(
     empty($_POST['vendorRegisterName']) ||
     empty($_POST['vendorRegisterEmail']) ||
-    empty($_POST['vendorRegisterCommission']) ||
-    empty($_POST['vendorRegisterUrl'])
+    empty($_POST['vendorRegisterCommission'])
   ) {
 
     $vendorRegisterErrors[] = 'All fields are required.';
@@ -31,9 +30,8 @@ if (isset($_POST['vendorRegisterSubmit'])) {
     $vendorRegisterName = htmlentities($_POST['vendorRegisterName']);
     $vendorRegisterEmail = htmlentities($_POST['vendorRegisterEmail']);
     $vendorRegisterCommission = htmlentities($_POST['vendorRegisterCommission']);
-    $vendorRegisterUrl = htmlentities($_POST['vendorRegisterUrl']);
 
-    $vendors->registerVendor($vendorRegisterName, $vendorRegisterEmail, $vendorRegisterCommission, $vendorRegisterUrl);
+    $vendors->registerVendor($vendorRegisterName, $vendorRegisterEmail, $vendorRegisterCommission);
     header('Location: get-started.php?success');
     exit();
   }
@@ -88,11 +86,6 @@ if (isset($_POST['vendorRegisterSubmit'])) {
               <input type="text" id="vendorRegisterCommission" class="form-control" name="vendorRegisterCommission" placeholder="eg. 10%"
                      value="<?php if(isset($_POST['vendorRegisterCommission'])) echo htmlentities($_POST['vendorRegisterCommission']); ?>"/>
             </div>
-            <div class="form-group">
-              <label for="vendorRegisterUrl" class="control-label">URL to your API</label>
-              <input type="url" id="vendorRegisterUrl" class="form-control" name="vendorRegisterUrl" placeholder="eg. http://myshop.dk/products.json"
-                     value="<?php if(isset($_POST['vendorRegisterUrl'])) echo htmlentities($_POST['vendorRegisterUrl']); ?>"/>
-            </div>
             <input type="submit" name="vendorRegisterSubmit" value="I am ready" class="btn btn-primary btn-block btn-lg"/>
           </form>
         </div>
@@ -122,8 +115,11 @@ if (isset($_POST['vendorRegisterSubmit'])) {
       </div>
     </div>
   </div>
+</div>
 
-</body>
-</html>
+<?php
 
-<?php ob_flush(); ?>
+include_once '../../footer.php';
+ob_flush();
+
+?>

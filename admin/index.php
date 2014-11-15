@@ -97,5 +97,9 @@ if (isset($_POST['adminSubmit'])) {
   </div>
 </div>
 
-</body>
-</html>
+<?php
+
+include_once '../footer.php';
+ob_flush();
+
+?>

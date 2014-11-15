@@ -176,8 +176,11 @@ if (isset($_POST['registerSubmit'])) {
     </div>
   </div>
 </div>
-</body>
-</html>
 
-<?php ob_flush(); ?>
+<?php
+
+include_once '../../footer.php';
+ob_flush();
+
+?>
 

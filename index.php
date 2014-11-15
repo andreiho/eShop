@@ -1,6 +1,8 @@
 <?php
 
 include_once 'config/init.php';
+$general->userLoggedInProtect();
+$general->vendorLoggedInProtect();
 
 ?>
 
@@ -70,17 +72,17 @@ include_once 'config/init.php';
 
 <div class="container">
   <div class="row">
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="row">
         <?php
 
-        $allProducts = $products->getAllProducts();
+        $allProducts = $products->getAllOwnProducts();
 
         foreach ($allProducts as $product) {
 
           if($general->adminLoggedIn()) {
             echo '
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="thumbnail product">
                   <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
                   <div class="caption text-center">
@@ -98,7 +100,7 @@ include_once 'config/init.php';
             ';
           } else {
             echo '
-              <div class="col-md-4">
+              <div class="col-md-3">
                 <div class="thumbnail product">
                   <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
                   <div class="caption text-center">
@@ -118,33 +120,13 @@ include_once 'config/init.php';
         ?>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="panel panel-default text-center">
-            <div class="panel-heading">
-              <div class="panel-title">Become a partner</div>
-            </div>
-            <div class="panel-body">
-              Sign up as a partner shop and feature your own products on our website.
-              <br><br>
-              <i class="fa fa-star fa-2x"></i>
-              <br><br>
-              We offer low commision, 24/7 support and permanent backup of your products and orders.
-            </div>
-            <div class="panel-footer">
-              <a href="/views/vendors/get-started.php" class="btn btn-default btn-lg btn-block">Get Started Now</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="js/main.js" type="application/javascript"></script>
+<?php if(!$general->adminLoggedIn()) { ?>
+<a href="views/vendors/get-started.php" id="vendorTease">
+  Partner with us
+</a>
+<?php } ?>
 
-</body>
-</html>
+<?php include_once 'footer.php'; ?>
