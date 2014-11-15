@@ -22,7 +22,68 @@ include_once 'config/init.php';
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      hi there.
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <div class="thumbnail">
+            <img src="http://placehold.it/500x300" alt=" ">
+            <div class="caption text-center">
+              <h4>Product title</h4>
+              <p>Product description goes here.</p>
+              <p><a href="#" class="btn btn-primary" role="button">Buy this product</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-3">
       <div class="panel panel-default text-center">

@@ -34,7 +34,8 @@ h1, h2, h3, h4, h5, h6 {
 .eShop .panel,
 .eShop .panel-heading,
 .eShop .panel-body,
-.eShop .panel-footer {
+.eShop .panel-footer,
+.thumbnail {
   background-color: #ffffff;
   border: 0;
   border-radius: 0;
@@ -90,7 +91,8 @@ h1, h2, h3, h4, h5, h6 {
 input[type='text'],
 input[type='password'],
 input[type='email'],
-input[type='url'] {
+input[type='url'],
+textarea.form-control {
   border-radius: 0;
   border-color: lightgray;
   box-shadow: none;
@@ -100,7 +102,8 @@ input[type='url'] {
 input[type='text']:focus,
 input[type='password']:focus,
 input[type='email']:focus,
-input[type='url']:focus {
+input[type='url']:focus,
+textarea.form-control:focus {
   border: 1px solid #333;
   box-shadow: none;
 }

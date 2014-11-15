@@ -1,6 +1,6 @@
 <?php
 
-class Vendors {
+class Vendor {
 
   private $db;
 

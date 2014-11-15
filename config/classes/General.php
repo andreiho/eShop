@@ -2,6 +2,25 @@
 
 class General {
 
+  // Protection for admin
+  public function adminLoggedIn () {
+    return(isset($_SESSION['adminId'])) ? true : false;
+  }
+
+  public function adminLoggedInProtect() {
+    if ($this->adminLoggedIn() === true) {
+      header('Location: /admin/home.php');
+      exit();
+    }
+  }
+
+  public function adminLoggedOutProtect() {
+    if ($this->adminLoggedIn() === false) {
+      header('Location: /admin/index.php');
+      exit();
+    }
+  }
+
   // Protection for users
   public function userLoggedIn () {
     return(isset($_SESSION['userId'])) ? true : false;
@@ -21,7 +40,7 @@ class General {
     }
   }
 
-  // Protection for users
+  // Protection for vendors
   public function vendorLoggedIn () {
     return(isset($_SESSION['vendorId'])) ? true : false;
   }

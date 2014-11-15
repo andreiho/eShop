@@ -37,6 +37,24 @@
           </div>
         </div>
       </div>
+      <?php } else if($general->adminLoggedIn()) { ?>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="brand">
+            <ul class="nav nav-pills">
+              <li><a href="/views/vendors/home.php">eShop admin panel</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="user-menu pull-right">
+            <ul class="nav navbar-nav">
+              <li><a href="">hello, <b>admin</b></a></li>
+              <li><a href="/logout.php">logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
       <?php } else { ?>
       <div class="row">
         <div class="col-sm-6">

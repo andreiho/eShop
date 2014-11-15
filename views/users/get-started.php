@@ -114,9 +114,6 @@ if (isset($_POST['registerSubmit'])) {
               <div class="form-group">
                 <input type="password" name="loginPassword" placeholder="your password" class="form-control" />
               </div>
-              <div class="form-group">
-                <a href="#" class="forgot-password">Forgot your password?</a>
-              </div>
               <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginSubmit">Sign In</button>
             </fieldset>
           </form>

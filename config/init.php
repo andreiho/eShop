@@ -4,12 +4,14 @@ session_start();
 
 include_once 'classes/Bcrypt.php';
 include_once 'classes/General.php';
-include_once 'classes/Users.php';
-include_once 'classes/Vendors.php';
+include_once 'classes/Admin.php';
+include_once 'classes/User.php';
+include_once 'classes/Vendor.php';
 include_once 'connect/connect.php';
 
-$users = new Users($db);
-$vendors = new Vendors($db);
+$admin = new Admin($db);
+$users = new User($db);
+$vendors = new Vendor($db);
 $general = new General();
 $bcrypt = new Bcrypt();
 $date = new DateTime();
