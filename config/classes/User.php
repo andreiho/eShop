@@ -8,7 +8,7 @@ class User {
     $this->db = $database;
   }
 
-  public function registerUser($registerEmail, $registerPassword) {
+  public function registerUser($registerName, $registerEmail, $registerPassword) {
 
     global $bcrypt;
 
@@ -16,16 +16,17 @@ class User {
     $activationCode = $activationCode = uniqid(true);
 
     $emailSubject = 'eShop - Activate your account';
-    $emailBody = "Hi there,\r\n\r\nThank you for registering with us. To get started, follow the link bellow to activate your account: \r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/users/activate.php?email=$registerEmail&code=$activationCode\r\n\r\nThe eShop Team";
+    $emailBody = "Hi $registerName,\r\n\r\nThank you for registering with us. To get started, follow the link bellow to activate your account: \r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/users/activate.php?email=$registerEmail&code=$activationCode\r\n\r\nThe eShop Team";
 
     $registerPassword = $bcrypt->genHash($registerPassword);
 
-    $query = $this->db->prepare("INSERT INTO `users` (`user_email`, `user_password`, `user_timestamp`, `user_code`) VALUES (?, ?, ?, ?)");
+    $query = $this->db->prepare("INSERT INTO `users` (`user_name`,`user_email`, `user_password`, `user_timestamp`, `user_code`) VALUES (?, ?, ?, ?, ?)");
 
-    $query->bindValue(1, $registerEmail);
-    $query->bindValue(2, $registerPassword);
-    $query->bindValue(3, $time);
-    $query->bindValue(4, $activationCode);
+    $query->bindValue(1, $registerName);
+    $query->bindValue(2, $registerEmail);
+    $query->bindValue(3, $registerPassword);
+    $query->bindValue(4, $time);
+    $query->bindValue(5, $activationCode);
 
     try {
       $query->execute();
@@ -167,6 +168,22 @@ class User {
       return $query->fetch();
 
     } catch(PDOException $e){
+      die($e->getMessage());
+    }
+  }
+
+  public function getAllUsers() {
+
+    $query = $this->db->prepare("SELECT * FROM `users` WHERE `user_confirmed` = 1 ORDER BY `user_id` ASC");
+
+    try {
+
+      $query->execute();
+
+      $result = $query->fetchAll();
+      return $result;
+
+    } catch (PDOException $e) {
       die($e->getMessage());
     }
   }

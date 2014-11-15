@@ -42,7 +42,7 @@
         <div class="col-sm-6">
           <div class="brand">
             <ul class="nav nav-pills">
-              <li><a href="/views/vendors/home.php">eShop admin panel</a></li>
+              <li><a href="/admin/home.php">eShop admin panel</a></li>
             </ul>
           </div>
         </div>
@@ -69,6 +69,7 @@
             <ul class="nav navbar-nav">
               <li><a href="/views/users/get-started.php">are you a <b>customer</b>?</a></li>
               <li><a href="/views/vendors/login.php">are you a <b>partner</b>?</a></li>
+              <li><a href="/admin">are you <b>admin</b>?</a></li>
             </ul>
           </div>
         </div>

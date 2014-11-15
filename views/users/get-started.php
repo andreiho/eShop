@@ -41,11 +41,12 @@ if (isset($_POST['loginSubmit'])) {
 // REGISTRATION
 if (isset($_POST['registerSubmit'])) {
 
-  if(empty($_POST['registerEmail']) || empty($_POST['registerPassword'])){
+  if(empty($_POST['registerEmail']) || empty($_POST['registerPassword']) || empty($_POST['registerName'])){
 
     $registerErrors[] = 'All fields are required.<br>';
 
   } else {
+
     if (filter_var($_POST['registerEmail'], FILTER_VALIDATE_EMAIL) === false) {
       $registerErrors[] = 'Please enter a valid e-mail address.<br>';
     } else if ($users->doesRegisterEmailExist($_POST['registerEmail']) === true) {
@@ -57,16 +58,19 @@ if (isset($_POST['registerSubmit'])) {
     if($_POST['registerPassword'] != $_POST['confirmRegisterPassword']){
       $registerErrors[] = 'Oops, looks like the passwords don\'t match.<br>';
     }
+
   }
 
   if(empty($registerErrors) === true){
 
+    $name = htmlentities($_POST['registerName']);
     $email = htmlentities($_POST['registerEmail']);
     $password = $_POST['registerPassword'];
 
-    $users->registerUser($email, $password);
+    $users->registerUser($name, $email, $password);
     header('Location: get-started.php?success');
     exit();
+
   }
 }
 
@@ -108,11 +112,13 @@ if (isset($_POST['registerSubmit'])) {
           <form accept-charset="UTF-8" role="form" method="post">
             <fieldset>
               <div class="form-group">
-                <input type="email" name="loginEmail" placeholder="your e-mail" class="form-control" autofocus
+                <label for="loginEmail" class="control-label">Your e-mail</label>
+                <input type="email" id="loginEmail" name="loginEmail" class="form-control" autofocus
                        value="<?php if(isset($_POST['loginEmail'])) echo htmlentities($_POST['loginEmail']); ?>" />
               </div>
               <div class="form-group">
-                <input type="password" name="loginPassword" placeholder="your password" class="form-control" />
+                <label for="loginPassword" class="control-label">Your password</label>
+                <input type="password" id="loginPassword" name="loginPassword" class="form-control" />
               </div>
               <button class="btn btn-lg btn-primary btn-block" type="submit" name="loginSubmit">Sign In</button>
             </fieldset>
@@ -140,14 +146,22 @@ if (isset($_POST['registerSubmit'])) {
           <form accept-charset="UTF-8" role="form" method="post">
             <fieldset>
               <div class="form-group">
-                <input type="email" name="registerEmail" placeholder="your e-mail" class="form-control"
+                <label for="registerName" class="control-label">Your name</label>
+                <input type="text" id="registerName" name="registerName" placeholder="Full name" class="form-control"
+                       value="<?php if(isset($_POST['registerName'])) echo htmlentities($_POST['registerName']); ?>" />
+              </div>
+              <div class="form-group">
+                <label for="registerEmail" class="control-label">Your e-mail</label>
+                <input type="email" id="registerEmail" name="registerEmail" placeholder="example@domain.com" class="form-control"
                        value="<?php if(isset($_POST['registerEmail'])) echo htmlentities($_POST['registerEmail']); ?>" />
               </div>
               <div class="form-group">
-                <input type="password" name="registerPassword" placeholder="choose a password" class="form-control" />
+                <label for="registerPassword" class="control-label">Choose a password</label>
+                <input type="password" id="registerPassword" name="registerPassword" placeholder="minimum 6 characters" class="form-control" />
               </div>
               <div class="form-group">
-                <input type="password" name="confirmRegisterPassword" placeholder="confirm your password" class="form-control" />
+                <label for="confirmRegisterPassword" class="control-label">Verify password</label>
+                <input type="password" id="confirmRegisterPassword" name="confirmRegisterPassword" placeholder="same as above" class="form-control" />
               </div>
               <button class="btn btn-lg btn-primary btn-block" type="submit" name="registerSubmit">Create Account</button>
             </fieldset>

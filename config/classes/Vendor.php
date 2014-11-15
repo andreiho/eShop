@@ -199,4 +199,20 @@ class Vendor {
     }
   }
 
+  public function getAllVendors() {
+
+    $query = $this->db->prepare("SELECT * FROM `vendors` WHERE `vendor_confirmed` = 1 ORDER BY `vendor_id` ASC");
+
+    try {
+
+      $query->execute();
+
+      $result = $query->fetchAll();
+      return $result;
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
 } 
