@@ -49,6 +49,8 @@ if (isset($_POST['newProductSubmit'])) {
     $newProductPrice = htmlentities($_POST['newProductPrice']);
 
     $products->addNewOwnProduct($newProductName, $newProductDescription, $newProductImageUrl, $newProductPrice);
+    $update->ownProductsToJSON();
+    $update->ownProductsToXML();
 
     header('Location: home.php?product-added');
     exit();

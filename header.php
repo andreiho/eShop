@@ -31,7 +31,7 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b>partner</b></a></li>
+              <li><a href="">hello, <b><?php echo $vendor['vendor_name'];?></b></a></li>
               <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>

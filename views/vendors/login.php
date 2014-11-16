@@ -35,24 +35,28 @@ if (isset($_POST['vendorSendKeySubmit'])) {
 // AND LOGIN
 if (isset($_POST['vendorLoginSubmit'])) {
 
-  $loginEmail = $_POST['vendorLoginEmail'];
-  $loginKey = $_POST['vendorLoginKey'];
+  if (empty($_POST) === false) {
 
-  $vendorLogin = $vendors->verifyVendorLoginKey($loginEmail, $loginKey);
+    $loginEmail = $_POST['vendorLoginEmail'];
+    $loginKey = $_POST['vendorLoginKey'];
 
-  if ($vendorLogin === false) {
+    $vendorLogin = $vendors->verifyVendorLoginKey($loginEmail, $loginKey);
 
-    $vendorLoginErrors[] = 'Oops, looks like the login key you entered is incorrect.';
+    if ($vendorLogin === false) {
 
-  } else {
+      $vendorLoginErrors[] = 'Oops, looks like the login key you entered is incorrect.';
 
-    $_SESSION['vendorId'] = $vendorLogin;
+    } else {
 
-    header('Location: /views/vendors/home.php');
-    exit();
+      $_SESSION['vendorId'] = $vendorLogin;
+
+      header('Location: /views/vendors/home.php');
+      exit();
+
+    }
+  }
 
   }
-}
 
 ?>
 

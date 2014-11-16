@@ -15,6 +15,9 @@ if (isset($_GET['id']) === true) {
 
   } else {
 
+    $update->ownProductsToJSON();
+    $update->ownProductsToXML();
+
     header('Location: /index.php');
     exit();
 

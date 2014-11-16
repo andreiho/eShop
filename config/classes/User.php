@@ -101,10 +101,10 @@ class User {
       $query->execute();
       $data = $query->fetch();
       $storedPassword = $data['user_password'];
-      $id = $data['user_id'];
+      $userId = $data['user_id'];
 
       if($bcrypt->verify($loginPassword, $storedPassword) === true) {
-        return $id;
+        return $userId;
       } else {
         return false;
       }

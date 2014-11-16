@@ -157,7 +157,7 @@ class Vendor {
 
   public function verifyVendorLoginKey($vendorLoginEmail, $vendorLoginKey) {
 
-    $query = $this->db->prepare("SELECT `vendor_key` FROM `vendors` WHERE `vendor_email` = ?");
+    $query = $this->db->prepare("SELECT `vendor_key`, `vendor_id` FROM `vendors` WHERE `vendor_email` = ?");
 
     $query->bindValue(1, $vendorLoginEmail);
 
@@ -168,9 +168,10 @@ class Vendor {
       while ( $rows = $query->fetch() ) {
 
         $keyInDatabase = $rows['vendor_key'];
+        $vendorId = $rows['vendor_id'];
 
         if ($keyInDatabase === $vendorLoginKey){
-          return true;
+          return $vendorId;
         }
         else {
           return false;
@@ -210,6 +211,22 @@ class Vendor {
       return $result;
 
     } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function uploadPathToApi($apiPath, $vendorId) {
+
+    $query = $this->db->prepare("UPDATE `vendors` SET `vendor_url` = ? WHERE `vendor_id` = ?");
+
+    $query->bindValue(1, $apiPath);
+    $query->bindValue(2, $vendorId);
+
+    try {
+
+      $query->execute();
+
+    } catch(PDOException $e) {
       die($e->getMessage());
     }
   }

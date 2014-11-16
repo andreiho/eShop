@@ -72,53 +72,67 @@ $general->vendorLoggedInProtect();
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <div class="row">
-        <?php
+    <div role="tabpanel">
 
-        $allProducts = $products->getAllOwnProducts();
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#ownProducts" aria-controls="ownProducts" role="tab" data-toggle="tab">Our products</a></li>
+        <li role="presentation"><a href="#partnerProducts" aria-controls="partnerProducts" role="tab" data-toggle="tab">Products from partners</a></li>
+      </ul>
 
-        foreach ($allProducts as $product) {
+      <div class="tab-content">
 
-          if($general->adminLoggedIn()) {
-            echo '
-              <div class="col-md-3">
-                <div class="thumbnail product">
-                  <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
-                  <div class="caption text-center">
-                    <h4 class="title">' . $product['product_name'] . '</h4>
-                    <p class="description">' . $product['product_description'] . '</p>
-                    <p class="controls">
-                      <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                      <a href="#" class="btn btn-primary" role="button">Buy this</a>
-                    </p>
-                    <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                    <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
-                  </div>
+        <div role="tabpanel" class="tab-pane fade in active" id="ownProducts">
+
+          <?php
+
+          $allProducts = $products->getAllOwnProducts();
+
+          foreach ($allProducts as $product) {
+
+            if($general->adminLoggedIn()) {
+              echo '
+            <div class="col-md-3">
+              <div class="thumbnail product">
+                <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
+                <div class="caption text-center">
+                  <h4 class="title">' . $product['product_name'] . '</h4>
+                  <p class="description">' . $product['product_description'] . '</p>
+                  <p class="controls">
+                    <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
+                    <a href="#" class="btn btn-primary" role="button">Buy this</a>
+                  </p>
+                  <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                  <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
                 </div>
               </div>
-            ';
-          } else {
-            echo '
-              <div class="col-md-3">
-                <div class="thumbnail product">
-                  <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
-                  <div class="caption text-center">
-                    <h4 class="title">' . $product['product_name'] . '</h4>
-                    <p class="description">' . $product['product_description'] . '</p>
-                    <p class="controls">
-                      <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                      <a href="#" class="btn btn-primary" role="button">Buy this</a>
-                    </p>
-                  </div>
+            </div>
+          ';
+            } else {
+              echo '
+            <div class="col-md-3">
+              <div class="thumbnail product">
+                <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
+                <div class="caption text-center">
+                  <h4 class="title">' . $product['product_name'] . '</h4>
+                  <p class="description">' . $product['product_description'] . '</p>
+                  <p class="controls">
+                    <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
+                    <a href="#" class="btn btn-primary" role="button">Buy this</a>
+                  </p>
                 </div>
               </div>
-            ';
-          }
-        };
+            </div>
+          ';
+            }
+          };
 
-        ?>
+          ?>
+
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="partnerProducts"></div>
+
       </div>
+
     </div>
   </div>
 </div>
