@@ -72,4 +72,54 @@ class Update {
 
   }
 
-} 
+  public function vendorProductsToDb($vendorId) {
+
+    $vendorFromDB = new Vendor($this->db);
+    $vendor = $vendorFromDB->vendorData($vendorId);
+    $vendorApiPath = $vendor['vendor_url'];
+
+    // Check if path to API is .json or .xml
+    if (substr($vendorApiPath,-5) == ".json") {
+
+      $jsonProducts = file_get_contents($vendorApiPath);
+      $vendorProducts = json_decode($jsonProducts);
+
+      $vendorProductsToDb = new Product( $this->db );
+
+      for($i = 0; $i < count($vendorProducts->products); $i++) {
+
+        $vendorProduct = $vendorProducts->products[$i];
+
+        $vendorProductId = $vendorProduct->id;
+        $vendorProductName = $vendorProduct->name;
+        $vendorProductDescription = $vendorProduct->description;
+        $vendorProductImageUrl = $vendorProduct->image;
+        $vendorProductPrice = $vendorProduct->price;
+
+        $vendorProductsToDb->addProductsFromPartner($vendorId, $vendorProductId, $vendorProductName, $vendorProductDescription, $vendorProductImageUrl, $vendorProductPrice);
+
+      }
+
+    } else if (substr($vendorApiPath,-4) == ".xml") {
+
+      $xmlProducts = file_get_contents($vendorApiPath);
+      $vendorProducts = simplexml_load_string($xmlProducts);
+
+      $vendorProductsToDb = new Product( $this->db );
+
+      foreach ($vendorProducts as $vendorProduct) {
+
+        $vendorProductId = $vendorProduct->productId;
+        $vendorProductName = $vendorProduct->name;
+        $vendorProductDescription = $vendorProduct->description;
+        $vendorProductImageUrl = $vendorProduct->image;
+        $vendorProductPrice = $vendorProduct->price;
+
+        $vendorProductsToDb->addProductsFromPartner($vendorId, $vendorProductId, $vendorProductName, $vendorProductDescription, $vendorProductImageUrl, $vendorProductPrice);
+
+      }
+
+    }
+  }
+
+}

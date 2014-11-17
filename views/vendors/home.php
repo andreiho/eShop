@@ -3,7 +3,7 @@
 include_once '../../config/init.php';
 $general->vendorLoggedOutProtect();
 
-$globalVendorId = $vendor['vendor_id'];
+$vendorId = $vendor['vendor_id'];
 $vendorName = $vendor['vendor_name'];
 $vendorApiPath = $vendor['vendor_url'];
 
@@ -21,6 +21,7 @@ if (isset($_POST['apiPathSubmit'])) {
 
       $apiPath = htmlentities($_POST['apiPath']);
       $vendors->uploadPathToApi($apiPath, $vendor['vendor_id']);
+      $update->vendorProductsToDb($vendor['vendor_id']);
 
       header('Location: home.php?api-updated');
       exit();
@@ -52,14 +53,39 @@ if (isset($_POST['apiPathSubmit'])) {
   <div class="row">
     <div class="col-md-9">
       <div class="row">
-        <div class="col-md-4">
-          vendor product here
-        </div>
-        <div class="col-md-4">
-          vendor product here
-        </div>
-        <div class="col-md-4">
-          vendor product here
+        <div role="tabpanel">
+
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#myProducts" aria-controls="myProducts" role="tab" data-toggle="tab">My products</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="myProducts">
+
+              <?php
+
+              $vendorProducts = $products->getVendorProductsByVendorId($vendorId);
+
+              foreach ($vendorProducts as $product) {
+                echo '
+                  <div class="col-md-4">
+                    <div class="thumbnail product">
+                      <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
+                      <div class="caption text-center">
+                        <h4 class="title">' . $product['product_name'] . '</h4>
+                        <p class="description">' . $product['product_description'] . '</p>
+                        <p class="controls">
+                          <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ';
+              };
+
+              ?>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -85,9 +85,9 @@ $general->vendorLoggedInProtect();
 
           <?php
 
-          $allProducts = $products->getAllOwnProducts();
+          $ownProducts = $products->getAllOwnProducts();
 
-          foreach ($allProducts as $product) {
+          foreach ($ownProducts as $product) {
 
             if($general->adminLoggedIn()) {
               echo '
@@ -129,10 +129,36 @@ $general->vendorLoggedInProtect();
           ?>
 
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="partnerProducts"></div>
 
+        <div role="tabpanel" class="tab-pane fade" id="partnerProducts">
+
+          <?php
+
+          $vendorProducts = $products->getAllVendorProducts();
+
+          foreach ($vendorProducts as $product) {
+            echo '
+              <div class="col-md-3">
+                <div class="thumbnail product">
+                  <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
+                  <div class="caption text-center">
+                    <h4 class="title">' . $product['product_name'] . '</h4>
+                    <p class="description">' . $product['product_description'] . '</p>
+                    <p class="controls">
+                      <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
+                      <a href="#" class="btn btn-primary" role="button">Buy this</a>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ';
+          };
+
+          ?>
+
+
+        </div>
       </div>
-
     </div>
   </div>
 </div>

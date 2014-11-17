@@ -43,22 +43,6 @@ class Product {
     }
   }
 
-  public function getAllOwnProducts() {
-
-    $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = 28 AND `product_removed` = 0");
-
-    try {
-
-      $query->execute();
-
-      $result = $query->fetchAll();
-      return $result;
-
-    } catch (PDOException $e) {
-      die($e->getMessage());
-    }
-  }
-
   public function getAllProducts() {
 
     $query = $this->db->prepare("SELECT * FROM `products` WHERE `product_removed` = 0 ORDER BY `vendor_id` ASC");
@@ -75,35 +59,16 @@ class Product {
     }
   }
 
-  public function showProductById($productId) {
+  public function getAllOwnProducts() {
 
-    $query = $this->db->prepare("SELECT COUNT(*) FROM `products` WHERE `product_id` = ?");
-
-    $query->bindValue(1, $productId);
+    $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = 28 AND `product_removed` = 0");
 
     try {
 
       $query->execute();
 
-      while ($row = $query->fetch()) {
-
-        echo
-        '
-          <div class="col-md-4">
-            <div class="thumbnail product">
-              <div style="background-image:url("' . $row['product_image_url'] . '")"></div>
-              <div class="caption text-center">
-                <h4>' . $row['product_name'] . '</h4>
-                <p>' . $row['product_description'] . '</p>
-                <p>
-                  <span class="btn btn-default price">' . $row['product_price'] . '</span>
-                  <a href="#" class="btn btn-primary" role="button">Buy me</a>
-                </p>
-              </div>
-            </div>
-          </div>
-        ';
-      }
+      $result = $query->fetchAll();
+      return $result;
 
     } catch (PDOException $e) {
       die($e->getMessage());
@@ -137,6 +102,61 @@ class Product {
       }
 
     } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function addProductsFromPartner($vendorId, $productId, $productName, $productDescription, $productImageUrl, $productPrice){
+
+    $query = $this->db->prepare("INSERT INTO `products` (`vendor_id`, `ext_product_id`, `product_name`, `product_description`, `product_image_url`, `product_price`) VALUES ( ?, ?, ?, ?, ?, ? ) ");
+
+    $query->bindValue(1, $vendorId);
+    $query->bindValue(2, $productId);
+    $query->bindValue(3, $productName);
+    $query->bindValue(4, $productDescription);
+    $query->bindValue(5, $productImageUrl);
+    $query->bindValue(6, $productPrice);
+
+    try {
+
+      $query->execute();
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  public function getAllVendorProducts() {
+
+    $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` <> 28 AND `product_removed` = 0");
+
+    try {
+
+      $query->execute();
+
+      $result = $query->fetchAll();
+      return $result;
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+
+  }
+
+  public function getVendorProductsByVendorId($vendorId) {
+
+    $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = ? AND `product_removed` = 0");
+
+    $query->bindValue(1, $vendorId);
+
+    try {
+
+      $query->execute();
+
+      $result = $query->fetchAll();
+      return $result;
+
+    } catch (PDOException $e) {
       die($e->getMessage());
     }
   }

@@ -16,9 +16,9 @@ Admin:
 
 In your webshop, you sell local products as well as products from partners. Your website will display:
 
-	[ ] Your partner’s products from XML and/or JSON and save them into your own database
+	[x] Your partner’s products from XML and/or JSON and save them into your own database
 	[x] Your local products fetched directly from own database
-	[ ] Products from partners will also be fetched from your own database
+	[x] Products from partners will also be fetched from your own database
 
 When a user buys a product (just by clicking the “buy” button):
 
