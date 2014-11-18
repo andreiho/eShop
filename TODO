@@ -5,7 +5,7 @@ Admin:
 	[x] Add products directly to the database
 	[ ] Edit products directly from the database
 	[x] Delete products (never delete, change colunm active from yes to no)
-	[ ] See a list of purchases from clients (select * from purchases)
+	[x] See a list of purchases from clients (select * from purchases)
 	[x] See a list of partners (select * from partners)
 
 
