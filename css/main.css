@@ -93,6 +93,7 @@ input[type='text'],
 input[type='password'],
 input[type='email'],
 input[type='url'],
+input[type='number'],
 textarea.form-control {
   border-radius: 0;
   border-color: lightgray;
@@ -104,6 +105,7 @@ input[type='text']:focus,
 input[type='password']:focus,
 input[type='email']:focus,
 input[type='url']:focus,
+input[type='number']:focus,
 textarea.form-control:focus {
   border: 1px solid #333;
   box-shadow: none;
@@ -425,11 +427,14 @@ hr {
   background: rgba(0, 0, 0, 0.85);
 }
 #order-details-image {
-  height: 124px;
+  height: 128px;
+  margin-bottom: 30px;
 }
 #order-details-description {
   margin: 15px 0;
 }
-.vertical-line {
-  border-left: 1px solid #ff0000;
+#guestCustomerProductQuantity {
+  display: inline-block;
+  width: 84px;
+  margin-left: 15px;
 }

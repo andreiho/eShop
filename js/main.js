@@ -15,24 +15,37 @@ $(function(){
     });
 });
 
-// Get order details
+// Order review
 $(function(){
-    $(".order-details").click(function(e){
-        $("#order-details-name").text( $(this).attr('data-product-name') );
-        $("#order-details-image").css("background", "transparent url('" + $(this).attr('data-product-image') + "') no-repeat center");
-        $("#order-details-image").css("background-size", "100%");
-        $("#order-details-description").text( $(this).attr('data-product-description') );
-        $("#order-details-price").text("DKK " + $(this).attr('data-product-price') );
-        $("#place-order").attr('href', '/place-guest-order.php?productId=' + $(this).attr('data-product-id') + '&vendorId=' + $(this).attr('data-product-vendor-id') + '&userId=0');
-        return e.preventDefault();
+
+    $(".review-order").click(function(){
+
+        var pId = $(this).attr('data-product-id');
+        var pName = $(this).attr('data-product-name');
+        var pDesc = $(this).attr('data-product-description');
+        var pImg = $(this).attr('data-product-image');
+        var pPrice = $(this).attr('data-product-price');
+
+        var guestOrderProductDetails = [pName, pDesc, pImg, pPrice];
+
+        localStorage.setItem('orderReview', JSON.stringify(guestOrderProductDetails));
+
+        window.location.href = $(this).attr('href');
+
     });
 });
 
+// Get guest order details
 $(function(){
-    $("#saveGuestCustomerEmailAddress").click(function(e){
-        var currentHref = $("#place-order").attr("href");
-        $("#place-order").attr("href", currentHref + "&guestEmail=" + $("#guestCustomerEmailAddress").val());
-        $("#place-order").css("visibility", "visible");
-        return e.preventDefault();
-    });
+
+    var orderReviewProductDetails = JSON.parse(localStorage.getItem('orderReview'));
+
+    $("#order-details-name").text( orderReviewProductDetails[0] );
+    $("#order-details-image")
+        .css("background", "transparent url('" + orderReviewProductDetails[2] + "') no-repeat center")
+        .css("background-size", "100%");
+    $("#order-details-description").text( orderReviewProductDetails[1] );
+    $("#order-details-price").text("DKK " + orderReviewProductDetails[3] );
+
 });
+

@@ -70,48 +70,6 @@ $general->vendorLoggedInProtect();
   </div>
 </div>
 
-<!-- Modal Enter Guest Customer Email -->
-<div class='modal fade' id='guestCustomerCompleteOrder' tabindex='-1' role='dialog' aria-labelledby='guestCustomerCompleteOrder' aria-hidden='true'>
-  <div class='modal-dialog'>
-    <div class='modal-content'>
-      <div class='modal-body'>
-        <div class='row'>
-          <div class='col-md-9'>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="row">
-                  <div class="col-md-4" id="order-details-image"></div>
-                  <div class="col-md-8">
-                    <h5><strong id="order-details-name"></strong></h5>
-                    <p id="order-details-description"></p>
-                    <span id="order-details-price" class="btn btn-default btn-xs price"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6" style="border-left: 1px solid #eee">
-                <div class="row">
-                  <div class="col-md-10" style="padding-left: 30px">
-                    <h5><strong>Guest customer</strong></h5>
-                    <div style="margin-bottom: 10px">To complete your order, enter your e-mail address below:</div>
-                    <div class="form-group">
-                      <input type="email" id="guestCustomerEmailAddress" name="guestCustomerEmailAddress" class="form-control" placeholder="example@domain.com"/>
-                    </div>
-                    <a href="#" id="saveGuestCustomerEmailAddress" name="saveGuestCustomerEmailAddress" class="btn btn-primary btn-block btn-xs">Save e-mail address</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class='col-md-3 text-right'>
-            <a href="#" name="placeGuestOrder" class='btn btn-primary' id="place-order" style="visibility: hidden">Place order</a>
-            <button type='button' class='btn btn-default' data-dismiss='modal'>Cancel</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="container">
   <?php
   if (isset($_GET['order-placed']) && empty($_GET['order-placed'])) {
@@ -166,7 +124,8 @@ $general->vendorLoggedInProtect();
                   <p class="description">' . $product['product_description'] . '</p>
                   <p class="controls">
                     <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                    <a href="#" data-toggle="modal" data-target="#guestCustomerCompleteOrder" class="btn btn-primary order-details" role="button"
+                    <a href="/place-order.php?productId=' . $product['product_id'] . '&vendorId=' . $product['vendor_id'] . '&userId=0"
+                     class="btn btn-primary review-order" role="button"
                     data-product-id="' . $product['product_id'] . '"
                     data-product-vendor-id="' . $product['vendor_id'] . '"
                     data-product-name="' . $product['product_name'] . '"

@@ -10,7 +10,8 @@ if (isset($_POST['newProductSubmit'])) {
     empty($_POST['newProductName']) ||
     empty($_POST['newProductDescription']) ||
     empty($_POST['newProductImageUrl']) ||
-    empty($_POST['newProductPrice'])
+    empty($_POST['newProductPrice']) ||
+    empty($_POST['newProductQuantity'])
   ) {
 
     $productErrors[] = 'All fields are required.<br>';
@@ -19,7 +20,8 @@ if (isset($_POST['newProductSubmit'])) {
     !empty($_POST['newProductName']) &&
     !empty($_POST['newProductDescription']) &&
     !empty($_POST['newProductImageUrl']) &&
-    !empty($_POST['newProductPrice'])
+    !empty($_POST['newProductPrice']) &&
+    !empty($_POST['newProductQuantity'])
   ) {
 
     $newProductImageUrl = $_POST['newProductImageUrl'];
@@ -47,8 +49,9 @@ if (isset($_POST['newProductSubmit'])) {
     $newProductName = htmlentities($_POST['newProductName']);
     $newProductDescription = htmlentities($_POST['newProductDescription']);
     $newProductPrice = htmlentities($_POST['newProductPrice']);
+    $newProductQuantity = htmlentities($_POST['newProductQuantity']);
 
-    $products->addNewOwnProduct($newProductName, $newProductDescription, $newProductImageUrl, $newProductPrice);
+    $products->addNewOwnProduct($newProductName, $newProductDescription, $newProductImageUrl, $newProductPrice, $newProductQuantity);
     $update->ownProductsToJSON();
     $update->ownProductsToXML();
 
@@ -106,6 +109,9 @@ if (isset($_POST['newProductSubmit'])) {
                   <div class="form-group">
                     <textarea name="newProductDescription" placeholder="description" class="form-control" rows="2"></textarea>
                   </div>
+                  <div class="form-group">
+                  <input type="number" name="newProductQuantity" placeholder="quantity" class="form-control" />
+                  </div>
                   <button class="btn btn-lg btn-primary btn-block" type="submit" name="newProductSubmit">Add new product</button>
                 </fieldset>
               </form>
@@ -119,7 +125,7 @@ if (isset($_POST['newProductSubmit'])) {
         </div>
       </div>
       <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="panel-title">our orders</div>
@@ -129,18 +135,23 @@ if (isset($_POST['newProductSubmit'])) {
                 <thead>
                 <tr>
                   <th>id</th>
-                  <th>order placed</th>
+                  <th>placed</th>
+                  <th>product</th>
+                  <th>quantity</th>
                 </tr>
                 </thead>
                 <tbody class="text-left">
                 <?php
                 $ourOrders = $orders->getAllOwnOrders();
+                $productNames = $orders->getProductNameInOrdersByProductId();
 
-                foreach ($ourOrders as $order) {
+                foreach ($ourOrders as $index => $order) {
                   echo '
                     <tr>
                       <td>' . $order['order_id'] . '</td>
-                      <td>' . date('d-m-Y, H:m', $order['order_time']) . '</td>
+                      <td>' . date('d M Y, H:i', $order['order_timestamp']) . '</td>
+                      <td>' . $productNames[$index][1] . '</td>
+                      <td>' . $order['order_product_quantity'] . '</td>
                     </tr>
                   ';
                 }
@@ -150,7 +161,9 @@ if (isset($_POST['newProductSubmit'])) {
             </div>
           </div>
         </div>
-        <div class="col-md-6">
+      </div>
+      <div class="row">
+        <div class="col-md-12">
           <div class="panel panel-default">
             <div class="panel-heading">
               <div class="panel-title">partner orders</div>

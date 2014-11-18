@@ -24,15 +24,16 @@ class Product {
     }
   }
 
-  public function addNewOwnProduct($newProductName, $newProductDescription, $newProductImage, $newProductPrice) {
+  public function addNewOwnProduct($newProductName, $newProductDescription, $newProductImage, $newProductQuantity, $newProductPrice) {
 
-    $query = $this->db->prepare("INSERT INTO `products` (`product_name`, `product_description`, `product_image_url`, `product_price`, `vendor_id`) VALUES ( ?, ?, ?, ?, ? ) ");
+    $query = $this->db->prepare("INSERT INTO `products` (`product_name`, `product_description`, `product_image_url`, `product_quantity`, `product_price`, `vendor_id`) VALUES ( ?, ?, ?, ?, ?, ? ) ");
 
     $query->bindValue(1, $newProductName);
     $query->bindValue(2, $newProductDescription);
     $query->bindValue(3, $newProductImage);
-    $query->bindValue(4, $newProductPrice);
-    $query->bindValue(5, 28);
+    $query->bindValue(4, $newProductQuantity);
+    $query->bindValue(5, $newProductPrice);
+    $query->bindValue(6, 28);
 
     try {
 
