@@ -3,7 +3,7 @@
 include_once '../../config/init.php';
 $general->userLoggedOutProtect();
 
-$globalUserId = $user['user_id'];
+$customerId= $user['user_id'];
 $customerName = $user['user_name'];
 
 ?>

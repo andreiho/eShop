@@ -122,4 +122,23 @@ class Update {
     }
   }
 
+  public function updateAllVendorProducts( ){
+
+    $vendorFromDb = new Vendor( $this->db );
+    $allVendorsById = $vendorFromDb->getAllVendorsById();
+
+    $updateAllVendors = new Update( $this->db );
+
+    foreach ($allVendorsById as $vendorById) {
+
+      $currentVendorId = $vendorById[0];
+
+      if ($currentVendorId != 28){
+        $updateAllVendors->vendorProductsToDb($currentVendorId);
+      }
+
+    }
+
+  }
+
 }

@@ -215,6 +215,22 @@ class Vendor {
     }
   }
 
+  public function getAllVendorsById() {
+
+    $query = $this->db->prepare("SELECT `vendor_id` FROM `vendors` ");
+
+    try {
+
+      $query->execute();
+
+      $result = $query->fetchAll();
+      return $result;
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
   public function uploadPathToApi($apiPath, $vendorId) {
 
     $query = $this->db->prepare("UPDATE `vendors` SET `vendor_url` = ? WHERE `vendor_id` = ?");

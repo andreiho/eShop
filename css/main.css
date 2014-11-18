@@ -169,6 +169,9 @@ label {
 .tab-content {
   padding: 30px 0;
 }
+hr {
+  margin: 10px 0;
+}
 
 /* HEADER */
 #header {
@@ -381,8 +384,8 @@ label {
 .product .edit {
   margin-right: 15px;
 }
-.product .price,
-.product .price:hover {
+.price,
+.price:hover {
   cursor: default;
   background-color: white;
   color: #333;
@@ -420,4 +423,13 @@ label {
 }
 #vendorTease:hover {
   background: rgba(0, 0, 0, 0.85);
+}
+#order-details-image {
+  height: 124px;
+}
+#order-details-description {
+  margin: 15px 0;
+}
+.vertical-line {
+  border-left: 1px solid #ff0000;
 }

@@ -119,25 +119,44 @@ if (isset($_POST['newProductSubmit'])) {
         </div>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <div class="panel-title">purchases from eshop</div>
+              <div class="panel-title">our orders</div>
             </div>
             <div class="panel-body">
-              eshop orders go here
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>id</th>
+                  <th>order placed</th>
+                </tr>
+                </thead>
+                <tbody class="text-left">
+                <?php
+                $ourOrders = $orders->getAllOwnOrders();
+
+                foreach ($ourOrders as $order) {
+                  echo '
+                    <tr>
+                      <td>' . $order['order_id'] . '</td>
+                      <td>' . date('d-m-Y, H:m', $order['order_time']) . '</td>
+                    </tr>
+                  ';
+                }
+                ?>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <div class="panel-title">purchases from partners</div>
+              <div class="panel-title">partner orders</div>
             </div>
             <div class="panel-body">
-              partner orders go here
+              eshop orders go here
             </div>
           </div>
         </div>
