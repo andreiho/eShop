@@ -8,20 +8,21 @@ class Order {
     $this->db = $database;
   }
 
-  public function addNewOrder($newOrderVendorId, $newOrderUserId, $newOrderProductId, $newOrderProductQuantity, $newOrderDeliveryAddress, $newOrderPhoneNumber) {
+  public function addNewOrder($newOrderVendorId, $newOrderUserId, $newOrderProductId, $newOrderProductQuantity, $newOrderDeliveryAddress, $newOrderEmail, $newOrderPhoneNumber) {
 
     $newOrderTime = time();
 
-    $query = $this->db->prepare("INSERT INTO `orders` (`order_partner_id`, `order_customer_id`, `order_product_id`, `order_product_quantity`, `order_delivery_address`, `order_phone_number`, `order_timestamp`, `order_processed`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $query = $this->db->prepare("INSERT INTO `orders` (`order_partner_id`, `order_customer_id`, `order_product_id`, `order_product_quantity`, `order_delivery_address`, `order_email`, `order_phone_number`, `order_timestamp`, `order_processed`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
     $query->bindValue(1, $newOrderVendorId);
     $query->bindValue(2, $newOrderUserId);
     $query->bindValue(3, $newOrderProductId);
     $query->bindValue(4, $newOrderProductQuantity);
     $query->bindValue(5, $newOrderDeliveryAddress);
-    $query->bindValue(6, $newOrderPhoneNumber);
-    $query->bindValue(7, $newOrderTime);
-    $query->bindValue(8, 0);
+    $query->bindValue(6, $newOrderEmail);
+    $query->bindValue(7, $newOrderPhoneNumber);
+    $query->bindValue(8, $newOrderTime);
+    $query->bindValue(9, 0);
 
     try {
 

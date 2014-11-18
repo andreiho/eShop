@@ -24,6 +24,14 @@ $customerName = $user['user_name'];
 <?php include_once '../../header.php'; ?>
 
   <div class="container">
+    <?php
+    if (isset($_GET['order-placed']) && empty($_GET['order-placed'])) {
+      echo "<div class='alert alert-success alertTop'>
+              <strong>Boom, your order has been placed. </strong>You should receive a confirmation of your order on your e-mail.
+              Thank you for shopping with us.
+          </div>";
+    }
+    ?>
     <div class="row">
       <div role="tabpanel">
 
@@ -41,42 +49,28 @@ $customerName = $user['user_name'];
             $ownProducts = $products->getAllOwnProducts();
 
             foreach ($ownProducts as $product) {
-
-              if($general->adminLoggedIn()) {
-                echo '
-            <div class="col-md-3">
-              <div class="thumbnail product">
-                <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
-                <div class="caption text-center">
-                  <h4 class="title">' . $product['product_name'] . '</h4>
-                  <p class="description">' . $product['product_description'] . '</p>
-                  <p class="controls">
-                    <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                    <a href="#" class="btn btn-primary" role="button">Buy this</a>
-                  </p>
-                  <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                  <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
+              echo '
+                <div class="col-md-3">
+                  <div class="thumbnail product">
+                    <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
+                    <div class="caption text-center">
+                      <h4 class="title">' . $product['product_name'] . '</h4>
+                      <p class="description">' . $product['product_description'] . '</p>
+                      <p class="controls">
+                        <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
+                        <a href="place-order.php?productId=' . $product['product_id'] . '&vendorId=' . $product['vendor_id'] . '&userId=' . $customerId . '"
+                         class="btn btn-primary review-order" role="button"
+                        data-product-id="' . $product['product_id'] . '"
+                        data-product-vendor-id="' . $product['vendor_id'] . '"
+                        data-product-name="' . $product['product_name'] . '"
+                        data-product-description="' . $product['product_description'] . '"
+                        data-product-image="' . $product['product_image_url'] . '"
+                        data-product-price="' . $product['product_price'] . '">Buy this</a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ';
-              } else {
-                echo '
-            <div class="col-md-3">
-              <div class="thumbnail product">
-                <div class="image" style="background: url(' . $product['product_image_url'] . ') no-repeat center; background-size:100%"></div>
-                <div class="caption text-center">
-                  <h4 class="title">' . $product['product_name'] . '</h4>
-                  <p class="description">' . $product['product_description'] . '</p>
-                  <p class="controls">
-                    <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                    <a href="#" class="btn btn-primary" role="button">Buy this</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          ';
-              }
+              ';
             };
 
             ?>

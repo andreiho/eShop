@@ -35,7 +35,7 @@ if (isset($_POST['placeGuestOrder'])) {
     $guestCustomerDeliveryAddress = htmlentities($_POST['guestCustomerDeliveryAddress']);
     $guestCustomerProductQuantity = htmlentities($_POST['guestCustomerProductQuantity']);
 
-    $placeGuestOrder = $orders->addNewOrder($vendorId, $userId, $productId, $guestCustomerProductQuantity, $guestCustomerDeliveryAddress, $guestCustomerPhoneNumber);
+    $placeGuestOrder = $orders->addNewOrder($vendorId, $userId, $productId, $guestCustomerProductQuantity, $guestCustomerDeliveryAddress, $guestCustomerEmailAddress, $guestCustomerPhoneNumber);
 
     $orderConfirmationSubject = 'eShop - Order confirmation';
     $orderConfirmationBody = "Hi there,\r\n\r\nYour order has been placed and it is now being processed.\r\n\r\nThank you for shopping with us.\r\n\r\nThe eShop Team";

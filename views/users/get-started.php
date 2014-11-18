@@ -95,7 +95,7 @@ if (isset($_POST['registerSubmit'])) {
 <div id="myAccount" class="container">
   <?php
   if (isset($_GET['success']) && empty($_GET['success'])) {
-    echo "<div class='alert alert-success registerSuccess'>
+    echo "<div class='alert alert-success alertTop'>
               <strong>Yay, you're in. </strong>If the e-mail address you provided is valid, you should receive an activation link.
               Follow that link to activate your account and start shopping.
           </div>";

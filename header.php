@@ -92,7 +92,6 @@
               <li><a href="#">Products</a></li>
               <li><a href="#">Partners</a></li>
               <li><a href="#">Contact</a></li>
-              <li><a href="#"><i class="fa fa-shopping-cart fa-lg"></i> 0</a></li>
             </ul>
             <div class="input-group input-group-sm search">
               <input type="text" class="form-control" placeholder="Search" name="q">

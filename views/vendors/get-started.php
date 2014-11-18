@@ -57,7 +57,7 @@ if (isset($_POST['vendorRegisterSubmit'])) {
 <div class="container">
   <?php
   if (isset($_GET['success']) && empty($_GET['success'])) {
-    echo "<div class='alert alert-success registerSuccess'>
+    echo "<div class='alert alert-success alertTop'>
               <strong>Thank you for signing up as a partner. </strong>We will notify you on the e-mail address you provided as soon as your account has been approved.
               In the meantime, <a href='../products'>browse some of our products.</a>
           </div>";

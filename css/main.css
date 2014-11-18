@@ -366,8 +366,7 @@ hr {
 .eShop .alert-info {
   box-shadow: inset #31708f 3px 0;
 }
-.eShop .registerSuccess,
-.eShop .keySent {
+.eShop .alertTop {
   margin-bottom: 30px;
 }
 .home i {
@@ -433,7 +432,7 @@ hr {
 #order-details-description {
   margin: 15px 0;
 }
-#guestCustomerProductQuantity {
+#guestCustomerProductQuantity, #customerProductQuantity {
   display: inline-block;
   width: 84px;
   margin-left: 15px;
