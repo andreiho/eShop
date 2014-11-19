@@ -318,4 +318,31 @@ class Vendor {
     }
   }
 
+  /**
+   * Function returning the commission based on a vendor_id.
+   *
+   * @param vendorId
+   *
+   */
+  public function getCommissionByVendorId($vendorId) {
+
+    $query = $this->db->prepare("SELECT * FROM `vendors` WHERE `vendor_id` = ?");
+
+    $query->bindValue(1, $vendorId);
+
+    try {
+
+      $query->execute();
+
+      while ( $rows = $query->fetch() ) {
+        $vendorCommission = $rows['vendor_commission'];
+      }
+
+      return $vendorCommission;
+
+    } catch(PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
 } 

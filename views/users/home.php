@@ -31,6 +31,11 @@ $customerName = $user['user_name'];
               Thank you for shopping with us.
           </div>";
     }
+    if (isset($_GET['partner-order-placed']) && empty($_GET['partner-order-placed'])) {
+      echo "<div class='alert alert-success alertTop'>
+              <strong>Your order has been created. </strong>Because you ordered a product sold by a partner, we have sent the order information to them and they will handle the processing.
+          </div>";
+    }
     ?>
     <div class="row">
       <div role="tabpanel">
@@ -93,7 +98,14 @@ $customerName = $user['user_name'];
                     <p class="description">' . $product['product_description'] . '</p>
                     <p class="controls">
                       <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
-                      <a href="#" class="btn btn-primary" role="button">Buy this</a>
+                      <a href="place-order.php?productId=' . $product['product_id'] . '&productExtId=' . $product['ext_product_id'] . '&vendorId=' . $product['vendor_id'] . '&userId=0"
+                       class="btn btn-primary review-order" role="button"
+                      data-product-id="' . $product['product_id'] . '"
+                      data-product-vendor-id="' . $product['vendor_id'] . '"
+                      data-product-name="' . $product['product_name'] . '"
+                      data-product-description="' . $product['product_description'] . '"
+                      data-product-image="' . $product['product_image_url'] . '"
+                      data-product-price="' . $product['product_price'] . '">Buy this</a>
                     </p>
                   </div>
                 </div>
@@ -102,8 +114,6 @@ $customerName = $user['user_name'];
             };
 
             ?>
-
-
           </div>
         </div>
       </div>

@@ -22,23 +22,50 @@ if (isset($_POST['placeOrder'])) {
   if(empty($errors) === true) {
 
     $productId = trim($_GET['productId']);
+    $extProductId = trim($_GET['productExtId']);
     $vendorId = trim($_GET['vendorId']);
+    $userId = trim($_GET['userId']);
 
-    $customerPhoneNumber = htmlentities($_POST['customerPhoneNumber']);
-    $customerDeliveryAddress = htmlentities($_POST['customerDeliveryAddress']);
-    $customerProductQuantity = htmlentities($_POST['customerProductQuantity']);
-    $customerProductPrice= htmlentities($_POST['productPriceFromLocalStorage']);
-    $customerOrderTotal = $customerProductPrice * $customerProductQuantity;
+    if ($vendorId == 28) {
 
-    $placeOrder = $orders->addNewOrder($vendorId, $customerId, $productId, $customerProductQuantity, $customerOrderTotal, $customerDeliveryAddress, $customerEmail, $customerPhoneNumber);
+      $productId = trim($_GET['productId']);
+      $vendorId = trim($_GET['vendorId']);
 
-    $orderConfirmationSubject = 'eShop - Order confirmation';
-    $orderConfirmationBody = "Hi there,\r\n\r\nYour order has been placed and it is now being processed.\r\n\r\nThank you for shopping with us.\r\n\r\nThe eShop Team";
+      $customerPhoneNumber = htmlentities($_POST['customerPhoneNumber']);
+      $customerDeliveryAddress = htmlentities($_POST['customerDeliveryAddress']);
+      $customerProductQuantity = htmlentities($_POST['customerProductQuantity']);
+      $customerProductPrice= htmlentities($_POST['productPriceFromLocalStorage']);
+      $customerOrderTotal = $customerProductPrice * $customerProductQuantity;
 
-    mail($customerEmail, $orderConfirmationSubject, $orderConfirmationBody);
+      $placeOrder = $orders->addNewOrder($vendorId, $customerId, $productId, $customerProductQuantity, $customerOrderTotal, $customerDeliveryAddress, $customerEmail, $customerPhoneNumber);
 
-    header('Location: home.php?order-placed');
-    exit();
+      $orderConfirmationSubject = 'eShop - Order confirmation';
+      $orderConfirmationBody = "Hi there,\r\n\r\nYour order has been placed and it is now being processed.\r\n\r\nThank you for shopping with us.\r\n\r\nThe eShop Team";
+
+      mail($customerEmail, $orderConfirmationSubject, $orderConfirmationBody);
+
+      header('Location: home.php?order-placed');
+      exit();
+
+    } else {
+
+      $vendorCommission = $vendors->getCommissionByVendorId($vendorId);
+
+      $customerEmailAddress = htmlentities($_POST['customerEmailAddress']);
+      $customerPhoneNumber = htmlentities($_POST['customerPhoneNumber']);
+      $customerDeliveryAddress = htmlentities($_POST['customerDeliveryAddress']);
+      $customerProductQuantity = htmlentities($_POST['customerProductQuantity']);
+      $customerProductPrice= htmlentities($_POST['productPriceFromLocalStorage']);
+
+      $customerOrderCommission = ($customerProductPrice * $customerProductQuantity) * $vendorCommission / 100;
+      $customerOrderTotal = ($customerProductPrice * $customerProductQuantity) - $customerOrderCommission;
+
+      $placeOrder = $orders->addNewOrder($vendorId, $customerId, $extProductId, $customerProductQuantity, $customerOrderTotal, $customerDeliveryAddress, $customerEmail, $customerPhoneNumber);
+
+      header('Location: home.php?partner-order-placed');
+      exit();
+
+    }
 
   }
 }

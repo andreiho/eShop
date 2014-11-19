@@ -57,6 +57,7 @@ if (isset($_POST['apiPathSubmit'])) {
 
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#myProducts" aria-controls="myProducts" role="tab" data-toggle="tab">My products</a></li>
+            <li role="presentation"><a href="#myOrders" aria-controls="myOrders" role="tab" data-toggle="tab">My orders</a></li>
           </ul>
 
           <div class="tab-content">
@@ -85,6 +86,53 @@ if (isset($_POST['apiPathSubmit'])) {
 
               ?>
             </div>
+            <div role="tabpanel" class="tab-pane fade" id="myOrders">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <div class="panel-title">Orders placed to us</div>
+                    </div>
+                    <div class="panel-body">
+                      <table class="table">
+                        <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>placed</th>
+                          <th>product</th>
+                          <th>price</th>
+                          <th>quantity</th>
+                          <th>commission taken</th>
+                          <th>total</th>
+                        </tr>
+                        </thead>
+                        <tbody class="text-left">
+                        <?php
+                        $partnerOrders = $orders->getAllPartnerOrders();
+                        $productInfo = $orders->getProductNameAndPriceInPartnerOrdersByProductId();
+
+                        foreach ($partnerOrders as $index => $order) {
+                          $productCommission = $order['order_product_quantity'] * $productInfo[$index][2] - $order['order_total'];
+                          echo '
+                        <tr>
+                          <td>' . $order['order_id'] . '</td>
+                          <td>' . date('d M Y, H:i', $order['order_timestamp']) . '</td>
+                          <td>' . $productInfo[$index][1] . '</td>
+                          <td>DKK ' . $productInfo[$index][2] . '</td>
+                          <td>' . $order['order_product_quantity'] . '</td>
+                          <td>DKK ' . $productCommission . '</td>
+                          <td>DKK ' . $order['order_total'] . '</td>
+                        </tr>
+                      ';
+                        }
+                        ?>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -109,16 +157,6 @@ if (isset($_POST['apiPathSubmit'])) {
               echo '<div class="panel-footer"><div class="alert alert-danger">' . implode($errors) . '</div></div>';
             }
             ?>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <div class="panel-title">Your orders</div>
-            </div>
-            <div class="panel-body">
-              orders received by partner here
-            </div>
           </div>
         </div>
       </div>

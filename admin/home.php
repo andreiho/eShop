@@ -274,7 +274,40 @@ if (isset($_POST['newProductSubmit'])) {
                   <div class="panel-title">Orders placed to partners</div>
                 </div>
                 <div class="panel-body">
-                  Orders placed to partners go here
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>placed</th>
+                      <th>product</th>
+                      <th>price</th>
+                      <th>quantity</th>
+                      <th>total for partner</th>
+                      <th>commission taken</th>
+                    </tr>
+                    </thead>
+                    <tbody class="text-left">
+                    <?php
+                    $partnerOrders = $orders->getAllPartnerOrders();
+                    $productInfo = $orders->getProductNameAndPriceInPartnerOrdersByProductId();
+
+                    foreach ($partnerOrders as $index => $order) {
+                      $productCommission = $order['order_product_quantity'] * $productInfo[$index][2] - $order['order_total'];
+                      echo '
+                        <tr>
+                          <td>' . $order['order_id'] . '</td>
+                          <td>' . date('d M Y, H:i', $order['order_timestamp']) . '</td>
+                          <td>' . $productInfo[$index][1] . '</td>
+                          <td>DKK ' . $productInfo[$index][2] . '</td>
+                          <td>' . $order['order_product_quantity'] . '</td>
+                          <td>DKK ' . $order['order_total'] . '</td>
+                          <td>DKK ' . $productCommission . '</td>
+                        </tr>
+                      ';
+                    }
+                    ?>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>

@@ -24,7 +24,7 @@ When a user buys a product (just by clicking the “buy” button):
 
 	[x] If the product is local, the client gets an email with purchase information. (Select * from products where product_id = 1)
 	[x] If the product is local,  the system saves the purchase information
-	[ ] If the product is from a partner, the system keeps the commission and sends the order and money (after taking the comission out) to the partner. This is done with a web-service.
+	[x] If the product is from a partner, the system keeps the commission and sends the order and money (after taking the comission out) to the partner. This is done with a web-service.
 
 In your webshop the user/buyer/client will be able to:
 
@@ -34,5 +34,5 @@ In your webshop the user/buyer/client will be able to:
 
 In your webshop the partner can:
 	[x] Login to upload the path to her XML and JSON API
-	[ ] Get an order coming from your own system
-	[ ] Get money from a sale that you make in your system, but the product was from the partner
+	[x] Get an order coming from your own system
+	[x] Get money from a sale that you make in your system, but the product was from the partner

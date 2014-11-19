@@ -26,9 +26,9 @@ $(function(){
         var pImg = $(this).attr('data-product-image');
         var pPrice = $(this).attr('data-product-price');
 
-        var guestOrderProductDetails = [pName, pDesc, pImg, pPrice];
+        var orderDetails = [pName, pDesc, pImg, pPrice];
 
-        localStorage.setItem('orderReview', JSON.stringify(guestOrderProductDetails));
+        localStorage.setItem('orderReview', JSON.stringify(orderDetails));
 
         window.location.href = $(this).attr('href');
 
@@ -38,15 +38,15 @@ $(function(){
 // Get guest order details
 $(function(){
 
-    var orderReviewProductDetails = JSON.parse(localStorage.getItem('orderReview'));
+    var orderDetails = JSON.parse(localStorage.getItem('orderReview'));
 
-    $("#order-details-name").text( orderReviewProductDetails[0] );
+    $("#order-details-name").text( orderDetails[0] );
     $("#order-details-image")
-        .css("background", "transparent url('" + orderReviewProductDetails[2] + "') no-repeat center")
+        .css("background", "transparent url('" + orderDetails[2] + "') no-repeat center")
         .css("background-size", "100%");
-    $("#order-details-description").text( orderReviewProductDetails[1] );
-    $("#order-details-price").text("DKK " + orderReviewProductDetails[3] );
-    $(".productPriceFromLocalStorage").val( orderReviewProductDetails[3] );
+    $("#order-details-description").text( orderDetails[1] );
+    $("#order-details-price").text("DKK " + orderDetails[3] );
+    $(".productPriceFromLocalStorage").val( orderDetails[3] );
 
 });
 
