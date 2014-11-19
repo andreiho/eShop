@@ -28,7 +28,7 @@ When a user buys a product (just by clicking the “buy” button):
 
 In your webshop the user/buyer/client will be able to:
 
-	[ ] Search for products. The page will display local as well as partner’s products. Done with the “like” keyword in MySQL
+	[x] Search for products. The page will display local as well as partner’s products. Done with the “like” keyword in MySQL
 	[x] Buy (click and buy, no payment, no credit card, just pretend the user entered all needed data)
 	[x] Get an email when he/she buys a product. The buyers must write her email somewhere. If you want, the client also writes her mobile number to get an SMS with the order
 
