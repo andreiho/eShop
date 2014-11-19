@@ -13,7 +13,7 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b><?php echo $user['user_name'];?></b></a></li>
+              <li><a href="/views/users/home.php">hello, <b><?php echo $user['user_name'];?></b></a></li>
               <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
@@ -31,7 +31,7 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b><?php echo $vendor['vendor_name'];?></b></a></li>
+              <li><a href="/views/vendors/home.php">hello, <b><?php echo $vendor['vendor_name'];?></b></a></li>
               <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
@@ -49,7 +49,7 @@
         <div class="col-sm-6">
           <div class="user-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="">hello, <b>admin</b></a></li>
+              <li><a href="/admin/home.php">hello, <b>admin</b></a></li>
               <li><a href="/logout.php">logout</a></li>
             </ul>
           </div>
@@ -89,16 +89,18 @@
         <div class="col-sm-8">
           <div class="shop-menu pull-right">
             <ul class="nav navbar-nav">
-              <li><a href="#">Products</a></li>
-              <li><a href="#">Partners</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="/">Products</a></li>
+              <li><a href="/partners.php">Partners</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
-            <div class="input-group input-group-sm search">
-              <input type="text" class="form-control" placeholder="Search" name="q">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+            <form action="/search.php" method="get" id="searchForm">
+              <div class="input-group input-group-sm search">
+                  <input type="text" class="form-control" placeholder="Search" name="q">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                  </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
