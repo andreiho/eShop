@@ -7,7 +7,20 @@ $(window).scroll(function(){
     }
 });
 
-// Delete product
+// Edit products
+$(function(){
+    $(".edit").click(function(e){
+        $("#editProductName").val($(this).attr('data-product-name'));
+        $("#editProductImageUrl").val($(this).attr('data-product-image'));
+        $("#editProductPrice").val($(this).attr('data-product-price'));
+        $("#editProductDescription").val($(this).attr('data-product-description'));
+        $("#editProductQuantity").val($(this).attr('data-product-quantity'));
+        $("#editProductId").val($(this).attr('data-product-id'));
+        return e.preventDefault();
+    });
+});
+
+// Delete products
 $(function(){
     $(".remove").click(function(e){
         $("#remove-product").attr('href', '/admin/remove-product.php?id=' + $(this).attr('data-remove-product'));

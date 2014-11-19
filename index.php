@@ -4,6 +4,37 @@ include_once 'config/init.php';
 $general->userLoggedInProtect();
 $general->vendorLoggedInProtect();
 
+// EDIT PRODUCT
+if (isset($_POST['submitEditProduct'])) {
+
+  if(
+    empty($_POST['editProductName']) ||
+    empty($_POST['editProductPrice']) ||
+    empty($_POST['editProductImageUrl']) ||
+    empty($_POST['editProductDescription']) ||
+    empty($_POST['editProductQuantity'])
+  ) {
+
+    $errors[] = 'All fields are required.';
+
+  }
+
+  if (empty($errors) === true) {
+
+    $editProductId = htmlentities($_POST['editProductId']);
+    $editProductName = htmlentities($_POST['editProductName']);
+    $editProductPrice = htmlentities($_POST['editProductPrice']);
+    $editProductImageUrl = htmlentities($_POST['editProductImageUrl']);
+    $editProductDescription = htmlentities($_POST['editProductDescription']);
+    $editProductQuantity = htmlentities($_POST['editProductQuantity']);
+
+    $products->editOwnProduct($editProductName, $editProductDescription, $editProductImageUrl, $editProductQuantity, $editProductPrice, $editProductId);
+    header('Location: index.php?product-edited');
+    exit();
+
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -28,21 +59,32 @@ $general->vendorLoggedInProtect();
       <div class="modal-body">
         <div class="row">
           <div class="col-md-9">
-            <div class="form-group">
-              <input type="text" name="editProductName" placeholder="name" class="form-control"/>
-            </div>
-            <div class="form-group">
-              <input type="text" name="editProductPrice" placeholder="price" class="form-control" />
-            </div>
-            <div class="form-group">
-              <input type="url" name="editProductImageUrl" placeholder="image url" class="form-control" />
-            </div>
-            <div class="form-group">
-              <textarea name="editProductDescription" placeholder="description" class="form-control" rows="3"></textarea>
-            </div>
+            <form accept-charset="UTF-8" role="form" method="post" id="editProductForm">
+              <div class="form-group">
+                <label for="editProductName" class="control-label">Product name</label>
+                <input type="text" id="editProductName" name="editProductName" placeholder="name" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="editProductPrice" class="control-label">Product price</label>
+                <input type="text" id="editProductPrice" name="editProductPrice" placeholder="price" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="editProductImageUrl" class="control-label">Product image</label>
+                <input type="url" id="editProductImageUrl" name="editProductImageUrl" placeholder="image url" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="editProductQuantity" class="control-label">Product quantity</label>
+                <input type="text" id="editProductQuantity" name="editProductQuantity" placeholder="quantity" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="editProductDescription" class="control-label">Product description</label>
+                <textarea id="editProductDescription" name="editProductDescription" placeholder="description" class="form-control" rows="3"></textarea>
+              </div>
+              <input type="hidden" id="editProductId" name="editProductId"/>
+            </form>
           </div>
           <div class="col-md-3 text-right">
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" form="editProductForm" name="submitEditProduct" id="submitEditProduct" class="btn btn-primary">Save changes</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           </div>
         </div>
@@ -83,6 +125,14 @@ $general->vendorLoggedInProtect();
               <strong>Your order has been created. </strong>Because you ordered a product sold by a partner, we have sent the order information to them and they will handle the processing.
           </div>";
   }
+  if (isset($_GET['partner-edited']) && empty($_GET['partner-edited'])) {
+    echo "<div class='alert alert-success alertTop'>
+              You have edited a product successfully.
+          </div>";
+  }
+  if(empty($errors) === false){
+    echo '<div class="alert alert-danger alertTop">' . implode($errors) . '</div>';
+  }
   ?>
   <div class="row">
     <div role="tabpanel">
@@ -113,7 +163,13 @@ $general->vendorLoggedInProtect();
                       <p class="controls">
                         <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
                       </p>
-                      <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
+                      <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"
+                      data-product-id="' . $product['product_id'] . '"
+                      data-product-name="' . $product['product_name'] . '"
+                      data-product-description="' . $product['product_description'] . '"
+                      data-product-image="' . $product['product_image_url'] . '"
+                      data-product-price="' . $product['product_price'] . '"
+                      data-product-quantity="' . $product['product_quantity'] . '"><i class="fa fa-pencil fa-lg"></i></a>
                       <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
                     </div>
                   </div>
@@ -138,6 +194,7 @@ $general->vendorLoggedInProtect();
                         data-product-image="' . $product['product_image_url'] . '"
                         data-product-price="' . $product['product_price'] . '">Buy this</a>
                       </p>
+                      <span class="badge">' . $product['product_quantity'] . '</span>
                     </div>
                   </div>
                 </div>
@@ -168,8 +225,6 @@ $general->vendorLoggedInProtect();
                       <p class="controls">
                         <span class="btn btn-default price">DKK ' . $product['product_price'] . '</span>
                       </p>
-                      <a href="#" data-toggle="modal" data-target="#editProductModal" class="edit"><i class="fa fa-pencil fa-lg"></i></a>
-                      <a href="#" data-toggle="modal" data-target="#deleteProductModal" data-remove-product="' . $product['product_id'] . '" class="remove"><i class="fa fa-times fa-lg"></i></a>
                     </div>
                   </div>
                 </div>

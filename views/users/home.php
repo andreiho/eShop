@@ -72,6 +72,7 @@ $customerName = $user['user_name'];
                         data-product-image="' . $product['product_image_url'] . '"
                         data-product-price="' . $product['product_price'] . '">Buy this</a>
                       </p>
+                      <span class="badge">' . $product['product_quantity'] . ' stk.</span>
                     </div>
                   </div>
                 </div>

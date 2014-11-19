@@ -194,4 +194,28 @@ class Product {
     }
   }
 
+  /**
+   * Function editing an existing product in the system.
+   */
+  public function editOwnProduct($editProductName, $editProductDescription, $editProductImage, $editProductQuantity, $editProductPrice, $productId) {
+
+    $query = $this->db->prepare("UPDATE `products` SET `product_name` = ?, `product_description` = ?, `product_image_url` = ?, `product_quantity` = ?, `product_price` = ? WHERE `product_id` = ?");
+
+    $query->bindValue(1, $editProductName);
+    $query->bindValue(2, $editProductDescription);
+    $query->bindValue(3, $editProductImage);
+    $query->bindValue(4, $editProductQuantity);
+    $query->bindValue(5, $editProductPrice);
+    $query->bindValue(6, $productId);
+
+
+    try {
+
+      $query->execute();
+
+    } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
 } 
