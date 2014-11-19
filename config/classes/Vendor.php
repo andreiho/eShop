@@ -8,14 +8,25 @@ class Vendor {
     $this->db = $database;
   }
 
+  /**
+   * Function creating a new partner account in the system.
+   *
+   * @param vendorRegisterName
+   * @param vendorRegisterEmail
+   * @param vendorRegisterCommission
+   *
+   */
   public function registerVendor($vendorRegisterName, $vendorRegisterEmail, $vendorRegisterCommission) {
 
-    $vendorActivationCode = $vendorActivationCode = uniqid(true);
+    $vendorActivationCode = $vendorActivationCode = uniqid(true); // We generate a unique activation code
 
+    // We notify admin that a new partner signed up
+    // Admin needs to approve the partner before he can log in
     $adminEmail = 'andrei.horodinca@gmail.com';
     $emailToAdminSubject = 'eShop - A new partner requires activation';
     $emailToAdminBody = "Hello admin,\r\n\r\nA shop owner has signed up as a partner on eShop. Follow the link below to approve the partnership:\r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/vendors/activate.php?email=$vendorRegisterEmail&code=$vendorActivationCode\r\n\r\nStay classy!";
 
+    // We notify the partner that his account is pending approval by admin
     $emailToVendorSubject = 'eShop - Thank your for signing up as a partner';
     $emailToVendorBody = "Hi there,\r\n\r\nThank you for signing up to become a partner of eShop.\r\n\r\nYour request is now pending approval. Once your account has been approved by an administrator, you will be notified on your email.\r\n\r\nThe eShop Team";
 
@@ -29,14 +40,20 @@ class Vendor {
     try {
       $query->execute();
 
-      mail($adminEmail, $emailToAdminSubject, $emailToAdminBody);
-      mail($vendorRegisterEmail, $emailToVendorSubject, $emailToVendorBody);
+      mail($adminEmail, $emailToAdminSubject, $emailToAdminBody); // We mail admin
+      mail($vendorRegisterEmail, $emailToVendorSubject, $emailToVendorBody); // We mail partner
 
     } catch(PDOException $e) {
       die($e->getMessage());
     }
   }
 
+  /**
+   * Function checking if the partner is already registered.
+   *
+   * @param vendorRegisterEmail
+   *
+   */
   public function doesVendorRegisterEmailExist($vendorRegisterEmail) {
 
     $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email`= ?");
@@ -57,6 +74,13 @@ class Vendor {
     }
   }
 
+  /**
+   * Function approving and activating a new partner account.
+   *
+   * @param vendorRegisterEmail
+   * @param vendorActivationCode
+   *
+   */
   public function activateVendor($vendorRegisterEmail, $vendorActivationCode) {
 
     $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email` = ? AND `vendor_code` = ? AND `vendor_confirmed` = ?");
@@ -88,6 +112,12 @@ class Vendor {
     }
   }
 
+  /**
+   * Function checking if the e-mail the partner uses to login is registered in the system.
+   *
+   * @param vendorLoginEmail
+   *
+   */
   public function doesVendorLoginEmailExist($vendorLoginEmail) {
 
     $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email`= ?");
@@ -108,6 +138,12 @@ class Vendor {
     }
   }
 
+  /**
+   * Function checking if the e-mail the partner uses to login is confirmed in the system.
+   *
+   * @param vendorLoginEmail
+   *
+   */
   public function isVendorLoginEmailConfirmed($vendorLoginEmail) {
 
     $query = $this->db->prepare("SELECT COUNT(`vendor_id`) FROM `vendors` WHERE `vendor_email`= ? AND `vendor_confirmed` = ?");
@@ -130,12 +166,18 @@ class Vendor {
     }
   }
 
+  /**
+   * Function generating a unique secure login key for the partner.
+   *
+   * @param vendorLoginEmail
+   *
+   */
   public function generateVendorLoginKey($vendorLoginEmail) {
 
-    // Generate login key
-    $digits = 6;
-    $vendorLoginKey = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT);
+    $digits = 6; // The length of the key
+    $vendorLoginKey = str_pad(rand(0, pow(10, $digits)-1), $digits, '0', STR_PAD_LEFT); // Generate the secure login key
 
+    // We e-mail the key to the partner trying to log in
     $emailToVendorSubject = 'eShop - Your login key';
     $emailToVendorBody = "Hi there,\r\n\r\nUse this key to login to your account:\r\n\r\n$vendorLoginKey\r\n\r\nThe eShop Team";
 
@@ -155,6 +197,13 @@ class Vendor {
     }
   }
 
+  /**
+   * Function checking the login key against the login e-mail
+   *
+   * @param vendorLoginEmail
+   * @param vendorLoginKey
+   *
+   */
   public function verifyVendorLoginKey($vendorLoginEmail, $vendorLoginKey) {
 
     $query = $this->db->prepare("SELECT `vendor_key`, `vendor_id` FROM `vendors` WHERE `vendor_email` = ?");
@@ -170,8 +219,8 @@ class Vendor {
         $keyInDatabase = $rows['vendor_key'];
         $vendorId = $rows['vendor_id'];
 
-        if ($keyInDatabase === $vendorLoginKey){
-          return $vendorId;
+        if ($keyInDatabase === $vendorLoginKey) { // We verify the login key
+          return $vendorId; // And start a session if the key they entered matches the one stored in the database
         }
         else {
           return false;
@@ -183,6 +232,12 @@ class Vendor {
     }
   }
 
+  /**
+   * Function returning all partner information based on the partner id.
+   *
+   * @param vendorId
+   *
+   */
   public function vendorData($vendorId) {
 
     $query = $this->db->prepare("SELECT * FROM `vendors` WHERE `vendor_id`= ?");
@@ -199,6 +254,9 @@ class Vendor {
     }
   }
 
+  /**
+   * Function returning all active partners in the system.
+   */
   public function getAllVendors() {
 
     $query = $this->db->prepare("SELECT * FROM `vendors` WHERE `vendor_confirmed` = 1 ORDER BY `vendor_id` ASC");
@@ -215,6 +273,9 @@ class Vendor {
     }
   }
 
+  /**
+   * Function returning all partners in the system based on their id.
+   */
   public function getAllVendorsById() {
 
     $query = $this->db->prepare("SELECT `vendor_id` FROM `vendors` ");
@@ -231,6 +292,16 @@ class Vendor {
     }
   }
 
+  /**
+   * Function uploading the path to the partner's API
+   *
+   * @param apiPath
+   *   The url to their .json or .xml products file
+   *
+   * @param vendorId
+   *   The id of the logged in partner.
+   *
+   */
   public function uploadPathToApi($apiPath, $vendorId) {
 
     $query = $this->db->prepare("UPDATE `vendors` SET `vendor_url` = ? WHERE `vendor_id` = ?");

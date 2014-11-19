@@ -11,6 +11,9 @@ class Bcrypt {
     $this->rounds = $rounds;
   }
 
+  /**
+   * Function generating the salt for passwords.
+   */
   private function genSalt() {
     $string = str_shuffle(mt_rand());
     $salt 	= uniqid($string ,true);
@@ -18,12 +21,34 @@ class Bcrypt {
     return $salt;
   }
 
+  /**
+   * Function encrypting the passwords.
+   *
+   * @param password
+   *   The password that needs to be encrypted.
+   *
+   * @return string
+   *    The hash.
+   *
+   */
   public function genHash($password) {
     $hash = crypt($password, '$2y$' . $this->rounds . '$' . $this->genSalt());
 
     return $hash;
   }
 
+  /**
+   * Function verifying the password against the generated hash.
+   *
+   * @param password
+   *   The password to be verified.
+   *
+   * @param existingHash
+   *   The generated hash for the password.
+   *
+   * @return bool
+   *
+   */
   public function verify($password, $existingHash) {
     $hash = crypt($password, $existingHash);
 

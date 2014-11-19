@@ -8,6 +8,9 @@ class Product {
     $this->db = $database;
   }
 
+  /**
+   * Function returning the number of products in the system.
+   */
   public function getNumberOfRows() {
 
     $query = $this->db->prepare("SELECT COUNT(*) FROM `products`");
@@ -24,6 +27,9 @@ class Product {
     }
   }
 
+  /**
+   * Function creating a new product in the system.
+   */
   public function addNewOwnProduct($newProductName, $newProductDescription, $newProductImage, $newProductQuantity, $newProductPrice) {
 
     $query = $this->db->prepare("INSERT INTO `products` (`product_name`, `product_description`, `product_image_url`, `product_quantity`, `product_price`, `vendor_id`) VALUES ( ?, ?, ?, ?, ?, ? ) ");
@@ -44,9 +50,12 @@ class Product {
     }
   }
 
+  /**
+   * Function returning all active products in the system.
+   */
   public function getAllProducts() {
 
-    $query = $this->db->prepare("SELECT * FROM `products` WHERE `product_removed` = 0 ORDER BY `vendor_id` ASC");
+    $query = $this->db->prepare("SELECT * FROM `products` WHERE `product_removed` = 0");
 
     try {
 
@@ -60,6 +69,9 @@ class Product {
     }
   }
 
+  /**
+   * Function returning all own active products in the system (vendor_id = 28).
+   */
   public function getAllOwnProducts() {
 
     $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = 28 AND `product_removed` = 0");
@@ -76,6 +88,13 @@ class Product {
     }
   }
 
+  /**
+   * Function removing a product from the system (product_removed = 1).
+   *
+   * @param productId
+   *   The id of the product to be removed.
+   *
+   */
   public function removeProduct($productId) {
 
     $query = $this->db->prepare("SELECT COUNT(*) FROM `products` WHERE `product_id` = ? AND `product_removed` = ?");
@@ -107,6 +126,9 @@ class Product {
     }
   }
 
+  /**
+   * Function adding a product from a partner to our system.
+   */
   public function addProductsFromPartner($vendorId, $productId, $productName, $productDescription, $productImageUrl, $productPrice){
 
     $query = $this->db->prepare("INSERT INTO `products` (`vendor_id`, `ext_product_id`, `product_name`, `product_description`, `product_image_url`, `product_price`) VALUES ( ?, ?, ?, ?, ?, ? ) ");
@@ -127,6 +149,9 @@ class Product {
     }
   }
 
+  /**
+   * Function returning all products from partners (vendor_id != 28).
+   */
   public function getAllVendorProducts() {
 
     $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` <> 28 AND `product_removed` = 0");
@@ -144,6 +169,13 @@ class Product {
 
   }
 
+  /**
+   * Function returning products based on the partner id (they are displayed when a partner logs in)
+   *
+   * @param vendorId
+   *   The id of the partner we want to display products for.
+   *
+   */
   public function getVendorProductsByVendorId($vendorId) {
 
     $query = $this->db->prepare("SELECT * FROM `products` WHERE `vendor_id` = ? AND `product_removed` = 0");

@@ -8,6 +8,13 @@ class Admin {
     $this->db = $database;
   }
 
+  /**
+   * Function checking if the username is indeed admin.
+   *
+   * @param adminUsername
+   *   The username that is being checked.
+   *
+   */
   public function doesAdminUsernameExist($adminUsername) {
 
     $query = $this->db->prepare("SELECT COUNT(*) FROM `admin` WHERE `admin_username`= ?");
@@ -28,6 +35,16 @@ class Admin {
     }
   }
 
+  /**
+   * Function performing the authentication for admin.
+   *
+   * @param adminUsername
+   *   The username used to login.
+   *
+   * @param adminPassword
+   *   The password used to login
+   *
+   */
   public function loginAdmin($adminUsername, $adminPassword) {
 
     $query = $this->db->prepare("SELECT COUNT(*) FROM `admin` WHERE `admin_username` = ? AND `admin_password` = ?");
