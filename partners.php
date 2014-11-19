@@ -34,7 +34,7 @@ if (isset($_POST['apiPathSubmit'])) {
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Home | eShop</title>
+    <title>Partners | eShop</title>
     <link rel="shortcut icon" href="images/ico/favicon.ico">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/font-awesome.min.css" rel="stylesheet">

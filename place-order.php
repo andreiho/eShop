@@ -34,8 +34,10 @@ if (isset($_POST['placeGuestOrder'])) {
     $guestCustomerPhoneNumber = htmlentities($_POST['guestCustomerPhoneNumber']);
     $guestCustomerDeliveryAddress = htmlentities($_POST['guestCustomerDeliveryAddress']);
     $guestCustomerProductQuantity = htmlentities($_POST['guestCustomerProductQuantity']);
+    $guestCustomerProductPrice= htmlentities($_POST['productPriceFromLocalStorage']);
+    $guestCustomerOrderTotal = $guestCustomerProductPrice * $guestCustomerProductQuantity;
 
-    $placeGuestOrder = $orders->addNewOrder($vendorId, $userId, $productId, $guestCustomerProductQuantity, $guestCustomerDeliveryAddress, $guestCustomerEmailAddress, $guestCustomerPhoneNumber);
+    $placeGuestOrder = $orders->addNewOrder($vendorId, $userId, $productId, $guestCustomerProductQuantity, $guestCustomerOrderTotal, $guestCustomerDeliveryAddress, $guestCustomerEmailAddress, $guestCustomerPhoneNumber);
 
     $orderConfirmationSubject = 'eShop - Order confirmation';
     $orderConfirmationBody = "Hi there,\r\n\r\nYour order has been placed and it is now being processed.\r\n\r\nThank you for shopping with us.\r\n\r\nThe eShop Team";
@@ -114,6 +116,7 @@ if (isset($_POST['placeGuestOrder'])) {
             <p id="order-details-description"></p>
             <span id="order-details-price" class="btn btn-default price"></span>
             <span><input type="number" form="guestOrderForm" value="1" id="guestCustomerProductQuantity" name="guestCustomerProductQuantity" class="form-control" placeholder="10"/></span>
+            <input type="hidden" form="guestOrderForm" name="productPriceFromLocalStorage" class="productPriceFromLocalStorage"/>
           </div>
         </div>
       </div>

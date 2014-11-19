@@ -91,8 +91,8 @@ if (isset($_POST['newProductSubmit'])) {
 
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#adminHome" aria-controls="adminHome" role="tab" data-toggle="tab">General stats</a></li>
-        <li role="presentation"><a href="#adminOrders" aria-controls="adminOrders" role="tab" data-toggle="tab">Orders to us</a></li>
-        <li role="presentation"><a href="#adminOrders2" aria-controls="adminOrders2" role="tab" data-toggle="tab">Orders to partners</a></li>
+        <li role="presentation"><a href="#adminOrders" aria-controls="adminOrders" role="tab" data-toggle="tab">Orders placed to us</a></li>
+        <li role="presentation"><a href="#adminOrders2" aria-controls="adminOrders2" role="tab" data-toggle="tab">Orders placed to partners</a></li>
       </ul>
 
       <div class="tab-content">
@@ -223,7 +223,7 @@ if (isset($_POST['newProductSubmit'])) {
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class="panel-title">our orders</div>
+                  <div class="panel-title">Orders placed to us</div>
                 </div>
                 <div class="panel-body">
                   <table class="table">
@@ -233,6 +233,7 @@ if (isset($_POST['newProductSubmit'])) {
                       <th>placed</th>
                       <th>product</th>
                       <th>quantity</th>
+                      <th>total</th>
                       <th>buyer</th>
                       <th>phone number</th>
                       <th>delivery address</th>
@@ -250,6 +251,7 @@ if (isset($_POST['newProductSubmit'])) {
                           <td>' . date('d M Y, H:i', $order['order_timestamp']) . '</td>
                           <td>' . $productNames[$index][1] . '</td>
                           <td>' . $order['order_product_quantity'] . '</td>
+                          <td>DKK ' . $order['order_total'] . '</td>
                           <td>' . $order['order_email'] . '</td>
                           <td>' . $order['order_phone_number'] . '</td>
                           <td>' . $order['order_delivery_address'] . '</td>
@@ -269,10 +271,10 @@ if (isset($_POST['newProductSubmit'])) {
             <div class="col-md-12">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <div class="panel-title">partner orders</div>
+                  <div class="panel-title">Orders placed to partners</div>
                 </div>
                 <div class="panel-body">
-                  eshop orders go here
+                  Orders placed to partners go here
                 </div>
               </div>
             </div>

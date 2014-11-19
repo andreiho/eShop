@@ -46,6 +46,7 @@ $(function(){
         .css("background-size", "100%");
     $("#order-details-description").text( orderReviewProductDetails[1] );
     $("#order-details-price").text("DKK " + orderReviewProductDetails[3] );
+    $(".productPriceFromLocalStorage").val( orderReviewProductDetails[3] );
 
 });
 
