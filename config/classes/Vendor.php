@@ -89,6 +89,11 @@ class Vendor {
     $query->bindValue(2, $vendorActivationCode);
     $query->bindValue(3, 0);
 
+    // We e-mail the key to the partner trying to log in
+    $emailToVendorSubject = 'eShop - Your account has been approved';
+    $emailToVendorBody = "Hi there,\r\n\r\nYour partnership request has been approved and your account is now activated.\r\n\r\nYou can go ahead and login here:\r\n\r\nhttp://eshop.andreihorodinca.dk/views/vendors/login.php\r\n\r\nIt's great to have you on board. :)\r\n\r\nThe eShop Team";
+
+
     try {
       $query->execute();
       $rows = $query->fetchColumn();
@@ -101,6 +106,9 @@ class Vendor {
         $query_2->bindValue(2, $vendorRegisterEmail);
 
         $query_2->execute();
+
+        mail($vendorRegisterEmail, $emailToVendorSubject, $emailToVendorBody);
+
         return true;
 
       } else {

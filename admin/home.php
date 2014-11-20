@@ -303,7 +303,7 @@ if (isset($_POST['newProductSubmit'])) {
                           <td>DKK ' . $productInfo[$index][2] . '</td>
                           <td>' . $order['order_product_quantity'] . '</td>
                           <td>DKK ' . $order['order_total'] . '</td>
-                          <td>' . number_format((float)$commissionPercentage, 2, '.', '') . '%</td>
+                          <td>' . number_format((float)$commissionPercentage, 0, '.', '') . '%</td>
                           <td>DKK ' . $productCommission . '</td>
                         </tr>
                       ';
