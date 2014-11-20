@@ -91,7 +91,7 @@
             <ul class="nav navbar-nav">
               <li><a href="/">Products</a></li>
               <li><a href="/partners.php">Partners</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="/contact.php">Contact</a></li>
             </ul>
             <form action="/search.php" method="get" id="searchForm">
               <div class="input-group input-group-sm search">
