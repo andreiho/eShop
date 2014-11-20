@@ -283,6 +283,7 @@ if (isset($_POST['newProductSubmit'])) {
                       <th>price</th>
                       <th>quantity</th>
                       <th>total for partner</th>
+                      <th>commission</th>
                       <th>commission taken</th>
                     </tr>
                     </thead>
@@ -293,6 +294,7 @@ if (isset($_POST['newProductSubmit'])) {
 
                     foreach ($partnerOrders as $index => $order) {
                       $productCommission = $order['order_product_quantity'] * $productInfo[$index][2] - $order['order_total'];
+                      $commissionPercentage = ($productCommission * 100) / ($order['order_product_quantity'] * $productInfo[$index][2]);
                       echo '
                         <tr>
                           <td>' . $order['order_id'] . '</td>
@@ -301,6 +303,7 @@ if (isset($_POST['newProductSubmit'])) {
                           <td>DKK ' . $productInfo[$index][2] . '</td>
                           <td>' . $order['order_product_quantity'] . '</td>
                           <td>DKK ' . $order['order_total'] . '</td>
+                          <td>' . number_format((float)$commissionPercentage, 2, '.', '') . '%</td>
                           <td>DKK ' . $productCommission . '</td>
                         </tr>
                       ';

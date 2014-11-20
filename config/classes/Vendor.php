@@ -24,7 +24,7 @@ class Vendor {
     // Admin needs to approve the partner before he can log in
     $adminEmail = 'andrei.horodinca@gmail.com';
     $emailToAdminSubject = 'eShop - A new partner requires activation';
-    $emailToAdminBody = "Hello admin,\r\n\r\nA shop owner has signed up as a partner on eShop. Follow the link below to approve the partnership:\r\n\r\nhttp://andreihorodinca.dk/devops/eShop/views/vendors/activate.php?email=$vendorRegisterEmail&code=$vendorActivationCode\r\n\r\nStay classy!";
+    $emailToAdminBody = "Hello admin,\r\n\r\nA shop owner has signed up as a partner on eShop. Follow the link below to approve the partnership:\r\n\r\nhttp://eshop.andreihorodinca.dk/views/vendors/activate.php?email=$vendorRegisterEmail&code=$vendorActivationCode\r\n\r\nStay classy!";
 
     // We notify the partner that his account is pending approval by admin
     $emailToVendorSubject = 'eShop - Thank your for signing up as a partner';
