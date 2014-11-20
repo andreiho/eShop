@@ -3,6 +3,10 @@ eShop
 
 XML and Databases school project.
 
+DEMO
+====
+http://eshop.andreihorodinca.dk/
+
 Requirements
 =====
 
