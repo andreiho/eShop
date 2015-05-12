@@ -6,7 +6,7 @@
 $config = array(
   'host'		=> 'andreihorodinca.dk',
   'username'	=> 'andreiho',
-  'password'	=> '776T8dSuqo',
+  'password'	=> '' // Hidden,
   'dbname' 	=> 'andreiho_xmldb'
 );
 
